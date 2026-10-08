@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG图标</title>
+    <script src="https://at.alicdn.com/t/c/font_5238954_xyc4jh3dpb.js"></script>
+    <link rel="stylesheet" href="./svg029.css">
+</head>
+<body>
+    <h2>SVG图标</h2>
+    <div class="tab-nav">
+        <div class="tab-item" onclick="changeTab(0)">
+            <svg class="icon" aria-hidden="true">
+                <use href="#icon-dingdan"></use>
+            </svg>
+            <span>浏览器</span>
+        </div>
+        <div class="tab-item" onclick="changeTab(1)">
+            <svg class="icon" aria-hidden="true">
+                <use href="#icon-gaishuai"></use>
+            </svg>
+            <span>关注</span>
+        </div>
+        <div class="tab-item" onclick="changeTab(2)">
+            <svg class="icon" aria-hidden="true">
+                <use href="#icon-dingwei"></use>
+            </svg>
+            <span>定位</span>
+        </div>
+    </div>
+
+<script>
+function changeTab(index) {
+    var items = document.querySelectorAll('.tab-item');
+    for (var i = 0; i < items.length; i++) {
+        items[i].classList.remove('active');
+    }
+    items[index].classList.add('active');
+}
+</script>
+</body>
+</html>

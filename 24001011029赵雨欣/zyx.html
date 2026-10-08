@@ -3,93 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自我介绍 - 赵雨欣</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: "Microsoft Yahei", sans-serif;
-            background-color: #fff7fb;
-            color: #333;
-            line-height: 1.8;
-            max-width: 700px;
-            margin: 50px auto;
-            padding: 0 25px;
-        }
-        .container {
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(200, 107, 133, 0.15);
-        }
-        h1 {
-            color: #c86b85;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        h2 {
-            color: #b85c78;
-            margin-bottom: 15px;
-        }
-        h3 {
-            color: #c86b85;
-            margin: 25px 0 10px;
-        }
-        p {
-            font-size: 16px;
-            margin-bottom:10px;
-        }
-        ul {
-            padding-left: 22px;
-        }
-        li {
-            margin: 8px 0;
-        }
-        .avatar-box{
-            text-align:center;
-            margin-bottom:25px;
-        }
-        .avatar{
-            width:140px;
-            height:140px;
-            border-radius:50%;
-            object-fit:cover;
-            border:3px solid #c86b85;
-        }
-    </style>
+    <title>我的第一个网页</title>
+    <!-- 引入zyx.css -->
+    <link rel="stylesheet" href="./zyx.css">
 </head>
 <body>
-    <div class="container">
-        <h1>个人自我介绍</h1>
+    <h2 class="title-demo">1.标题</h2>
+    <!-- 一共6级标题h1-h6 -->
+    <h1>一级标题</h1>
+    <h2>二级标题</h2>
+    <h3>三级标题</h3>
+    <h4>四级标题</h4>
+    <h5>五级标题</h5>
+    <h6>六级标题，最小的标题</h6>
 
-        <!-- 图片区域 -->
-        <div class="avatar-box">
-            <!-- 将src替换成你的图片路径，本地图片直接写文件名，和html放在同一个文件夹 -->
-            <img class="avatar" src="myphoto.jpg" alt="个人照片">
-        </div>
+    <h2 class="title-demo">2.段落</h2>
+    <p class="text-cont">段落的特点：段落内容自动换行，有自带的间距。</p>
+    <p>
+        段落的<em>特点</em>：段落内容<strong>自动换行</strong>，<br>
+        有<u>自带</u>的间距。<s>需要删除的</s>
+    </p>
+    <hr>
 
-        <h2>👋 Hello，我是赵雨欣</h2>
+    <h2 class="title-demo">3.超链接和图片</h2>
+    <a href="http://baidu.com" target="_blank">百度</a>
+    <img src="./img/1.jpg" alt="百度logo">
 
-        <h3>📌 个人简介</h3>
-        <p>大家好！我是赵雨欣，一名大三计算机专业的女生。</p>
-        <p>在校期间学习计算机相关课程，涉猎前端网页开发、嵌入式编程以及鸿蒙应用开发。喜欢动手做项目，在敲代码、调试硬件的过程中不断积累实战经验。对待学习认真踏实，遇到问题愿意耐心钻研解决。</p>
+    <h2 class="title-demo">4.列表</h2>
+    <h3>我喜欢做的事情</h3>
+    <ul class="list-demo" >
+        <li>打游戏</li>
+        <li>看电影</li>
+        <li>看书</li>
+    </ul>
+    <ol type="A">
+        <li>数学</li>
+        <li>英语</li>
+        <li>语文</li>
+    </ol>
 
-        <h3>🎧 兴趣爱好</h3>
-        <ul>
-            <li>网页前端开发，编写HTML、CSS页面，感受页面从无到有的乐趣</li>
-            <li>嵌入式与鸿蒙项目调试，做硬件相关小项目</li>
-            <li>闲暇的时候喜欢听音乐，放松自己</li>
-            <li>也喜欢学习新的技术知识，拓展自己的知识面</li>
-        </ul>
+    <h2 class="title-demo">5.表格</h2>
+    <table id="user-table" border="2" cellspacing="0" cellpadding="3">
+        <caption>用户信息表</caption>
+        <tr>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>城市</th>
+        </tr>
+        <tr>
+            <td>张三</td>
+            <td>18</td>
+            <td>男</td>
+            <td>北京</td>
+        </tr>
+        <tr>
+            <td>李四</td>
+            <td>20</td>
+            <td>女</td>
+            <td>上海</td>
+        </tr>
+    </table>
 
-        <h3>🎯 现阶段目标</h3>
-        <p>大三是夯实专业能力的关键时期。我希望继续打磨编程技术，丰富自己的项目作品集，补齐知识短板，不断提升实战能力，为后续实习和未来就业做好充足准备。</p>
-
-        <h3>✨ 自我评价</h3>
-        <p>性格沉稳有耐心，遇到bug不会轻易放弃。乐于接受新知识，愿意不断挑战自我，努力成为更好的技术学习者。</p>
+    <h2 class="title-demo">6.div块级元素</h2>
+    <div>
+        <p>div特点1：独占一整行，自动前后换行，是块级元素</p>
+        <p>div特点2：可以嵌套任意标签（标题、段落、图片、列表都能放）</p>
     </div>
+    <div>
+        <p>div特点1：独占一整行，自动前后换行，是块级元素</p>
+        <p>div特点2：可以嵌套任意标签（标题、段落、图片、列表都能放）</p>
+    </div>
+
+    <h2 class="title-demo">H5语义</h2>
+    <header>头部</header>
+    <nav>导航条</nav>
+    <section>内容区域</section>
+    <article>文章区域</article>
+    <footer>页脚</footer>
+    <aside>侧边栏</aside>
+
+    <h2 class="title-demo">基础表单+H5表单</h2>
+    <form action="http://baidu.com" name="fm" method="post">
+        <p>用户名：
+            <input type="text" placeholder="请输入用户名" required>
+        </p>
+        <p>
+            <label for="pwd">密码：</label>
+            <input type="password" name="pwd" id="pwd">
+        </p>
+        <p>邮箱：
+            <input type="email" name="email" id="email">
+        </p>
+        <p>
+            请上传文件：
+            <input type="file" name="file" id="file" multiple>
+        </p>
+        <p>
+            性别：
+            <input type="radio" name="gender" value="f">女
+            <input type="radio" name="gender" value="m">男
+        </p>
+        <p>
+            爱好：
+            <input type="checkbox" name="hobby" value="c"> coding
+            <input type="checkbox" name="hobby" value="s"> playing
+            <input type="checkbox" name="hobby" value="r"> reading
+        </p>
+        <p>
+            自我介绍：
+            <textarea name="intro" id="intro" cols="30" rows="10"></textarea>
+        </p>
+        <p>
+            籍贯：
+            <select name="city" id="city">
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="guangzhou">广州</option>
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="提交">
+            <input type="reset" value="重置">
+            <input type="button" value="取消">
+        </p>
+    </form>
+    <button class="btn">
+        表单外的按钮
+    </button>
 </body>
 </html>

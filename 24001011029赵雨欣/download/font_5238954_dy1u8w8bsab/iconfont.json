@@ -1,0 +1,30 @@
+{
+  "id": "5238954",
+  "name": "zyx029",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "48473014",
+      "name": "定位",
+      "font_class": "dingwei",
+      "unicode": "e743",
+      "unicode_decimal": 59203
+    },
+    {
+      "icon_id": "48473015",
+      "name": "订单",
+      "font_class": "dingdan",
+      "unicode": "e744",
+      "unicode_decimal": 59204
+    },
+    {
+      "icon_id": "48473016",
+      "name": "概率",
+      "font_class": "gaishuai",
+      "unicode": "e745",
+      "unicode_decimal": 59205
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+* {
+    padding: 0;
+    margin: 0;
+    /* width and height include border and padding */
+    box-sizing: border-box;
+}
+body{
+    background-color: yellow;
+    font-family: "Microsoft YaHei";
+    color: blue;
+}
+/* Inheritance: child elements inherit some properties of parent elements, such as font and color,
+but will not inherit margin, padding, border */
+.container{
+    background-color: red;
+    width: 1200px;
+    margin: 40px auto;
+}
+/* The priority of class selector is higher than tag selector */
+/* Selector priority: Descendant Selector > ID Selector > Class Selector > Tag Selector */
+.container-title{
+    color: black;
+}
+h2{
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+    padding: 10px 20px;
+    border: 2px dotted white;
+}
+/* The priority of descendant selector is higher than class selector.
+The more layers the descendant selector has, the higher its priority */
+/* body .container .card-wrap{
+    background-color:purple;
+    padding: 20px;
+} */
+.container .card-wrap{
+    background-color: green;
+    padding: 20px;
+}
+/* The priority of ID selector is higher than class selector */
+#card-wrap{
+    background-color: orange;
+}
+.card-wrap{
+    background-color: pink;
+    padding: 20px;
+}

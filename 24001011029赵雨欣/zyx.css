@@ -1,0 +1,18 @@
+.title-demo {
+    background-color: yellow;
+    color: red;
+    padding:4px;
+}
+.text-cont {
+    color: purple;
+}
+.list-demo li {
+    color: purple;
+}
+#user-table{
+    margin:8px 0;
+}
+.btn{
+    margin-top:10px;
+    padding:5px 10px;
+}

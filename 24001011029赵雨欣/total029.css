@@ -1,0 +1,142 @@
+/* =========换色版本：蓝灰色系========= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f4f6f8;
+}
+
+/* header 换为蓝色 */
+header {
+    background-color: #2c5282;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* nav 换为深蓝灰 */
+nav {
+    background-color: #1e3a5f;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #90cdf4;
+}
+
+/* flex两栏布局 */
+.layout-container {
+    display: flex;
+    gap: 8px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+main {
+    width: 792px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+aside {
+    width: 400px;
+    background: #e2e8f0;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+footer {
+    background: #1e3a5f;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+}
+
+/* 卡片区域 */
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.box li {
+    list-style: none;
+    width: 300px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.box img {
+    width: 100%;
+    display: block;
+    transition: all 0.6s;
+}
+
+.box li:hover img {
+    transform: scale(1.2);
+}
+
+.txt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: rgba(30, 58, 95, 0.75);
+    color: #fff;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.box li:hover .txt {
+    opacity: 1;
+}
+
+.box li:nth-child(odd):hover .txt {
+    height: 100%;
+    line-height: 300px;
+}
+
+/* 回到顶部按钮 换为蓝色 */
+.back-to-top {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #2c5282;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 50px;
+    text-decoration: none;
+    opacity: 0.5;
+    z-index: 999;
+    transition: all 0.3s;
+}
+
+.back-to-top:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}

@@ -1,147 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>赵雨欣的《高级网页设计》课堂实践</title>
-  <style>
-    :root{--bg:#fffaf0;--card:rgba(255,255,255,0.8);--glass:rgba(255,255,255,0.88);--accent:#b45309;--accent-2:#fbbf24;--muted:#5b4637;--text:#2d1d12}
-    html,body{height:100%;margin:0;font-family:Inter,Segoe UI,system-ui,-apple-system,Helvetica,Arial;background:radial-gradient(1200px 600px at 10% 10%, rgba(251,191,36,0.2), transparent), radial-gradient(900px 400px at 90% 90%, rgba(253,224,71,0.15), transparent), var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
-    .wrap{max-width:1100px;margin:40px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.8),rgba(255,246,224,0.7));box-shadow:0 10px 40px rgba(180,83,9,0.12);border:1px solid rgba(255,255,255,0.7)}
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    h1{margin:0;font-size:1.5rem;color:var(--accent);letter-spacing:0.4px}
-    p.lead{margin:6px 0 0;color:var(--muted)}
-    .grid{display:grid;grid-template-columns:1fr 340px;gap:22px;margin-top:18px}
-    .card{background:linear-gradient(180deg,var(--card),var(--glass));padding:18px;border-radius:12px;border:1px solid rgba(180,83,9,0.08)}
-    nav .list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:12px}
-    .item{background:rgba(255,255,255,0.45);padding:12px;border-radius:10px;display:flex;align-items:center;gap:10px;transition:transform .18s ease,box-shadow .18s ease;border:1px solid rgba(180,83,9,0.08)}
-    .item:hover{transform:translateY(-6px);box-shadow:0 8px 24px rgba(180,83,9,0.12)}
-    .item svg{width:34px;height:34px;flex:0 0 34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));padding:6px}
-    .item a{color:#2d1d12;text-decoration:none;font-weight:600}
-    .meta{font-size:0.85rem;color:var(--muted)}
-    .muted{color:var(--muted);font-size:0.95rem}
-    .search{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(180,83,9,0.15);background:rgba(255,255,255,0.7);color:var(--text)}
-    .count{font-size:0.9rem;color:var(--muted);margin-top:8px}
-    pre.prompt{white-space:pre-wrap;background:#fff7ec;padding:12px;border-radius:8px;color:#4d382b;overflow:auto;font-size:0.92rem;border:1px solid rgba(180,83,9,0.08)}
-    footer{margin-top:18px;color:var(--muted);font-size:0.9rem}
-    @media (max-width:820px){.grid{grid-template-columns:1fr;}.nav .list{grid-template-columns:1fr}.wrap{margin:18px;padding:16px}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="赵雨欣的《高级网页设计》课堂实践目录">
+    <title>赵雨欣｜高级网页设计课堂实践</title>
+    <style>
+        /* ========== 全局优雅调色板 ========== */
+        :root {
+            --ink: #1e293b;           /* 深邃墨蓝，用于主文字 */
+            --muted: #64748b;         /* 灰蓝，用于次要文字 */
+            --paper: #f8fafc;         /* 极浅灰，用于页面底色 */
+            --card-bg: rgba(255, 255, 255, 0.7); /* 玻璃拟态：半透明白 */
+            --card-border: rgba(255, 255, 255, 0.9); /* 玻璃拟态：高光边框 */
+            --accent: #6366f1;        /* 主强调色：优雅靛蓝 */
+            --accent-light: #a855f7;  /* 辅强调色：梦幻紫 */
+            --accent-pink: #ec4899;   /* 点缀色：活力粉 */
+            --yellow: #f59e0b;        /* 暖金色，用于亮点 */
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
+            line-height: 1.7;
+            /* 核心背景：柔和的多色渐变光晕，营造梦幻感 */
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .page-shell {
+            width: min(1120px, calc(100% - 40px));
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== 顶部导航 ========== */
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 0;
+            font-size: 14px;
+        }
+        .signature {
+            font-weight: 700;
+            letter-spacing: .12em;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .topbar a {
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 999px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+        .topbar a:hover {
+            background: #fff;
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.15);
+            transform: translateY(-2px);
+            color: var(--accent);
+        }
+
+        /* ========== 头部巨幕区（Hero） ========== */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(54px, 9vw, 112px) clamp(28px, 7vw, 96px);
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 24px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+        }
+        /* 在 Hero 区域增加一个柔和的光斑 */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -10%;
+            width: 60%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            z-index: 0;
+        }
+        .eyebrow {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 18px;
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+        }
+        h1, h2, p { position: relative; z-index: 1; }
+        h1 {
+            max-width: 720px;
+            margin-bottom: 20px;
+            font-family: Georgia, "Songti SC", serif;
+            font-size: clamp(42px, 7vw, 84px);
+            line-height: 1.08;
+            letter-spacing: .02em;
+            background: linear-gradient(135deg, #1e293b, #4f46e5, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-copy {
+            max-width: 600px;
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 18px;
+            line-height: 1.8;
+        }
+
+        /* ========== 章节标题 ========== */
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin: 72px 0 24px;
+            padding-left: 18px;
+            border-left: 4px solid var(--accent);
+        }
+        h2 {
+            margin-bottom: 0;
+            font-family: Georgia, "Songti SC", serif;
+            font-size: clamp(28px, 4vw, 42px);
+            line-height: 1.2;
+            color: var(--ink);
+        }
+        .section-note {
+            margin-bottom: 5px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* ========== 卡片网格：玻璃拟态 ========== */
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .lesson-card {
+            display: flex;
+            min-height: 280px;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 28px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .lesson-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .lesson-number {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .lesson-card h3 {
+            margin: 35px 0 8px;
+            font-size: 22px;
+            color: var(--ink);
+        }
+        .lesson-card p {
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .card-link {
+            margin-top: 24px;
+            color: var(--accent);
+            font-size: 14px;
+            font-weight: 700;
+            transition: letter-spacing 0.3s ease;
+        }
+        .lesson-card:hover .card-link {
+            letter-spacing: 1px;
+        }
+        .upcoming {
+            background: transparent;
+            border-style: dashed;
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: none;
+        }
+        .upcoming:hover {
+            background: rgba(255, 255, 255, 0.5);
+            border-style: solid;
+        }
+        .upcoming .lesson-number,
+        .upcoming .card-link {
+            color: var(--muted);
+            -webkit-text-fill-color: var(--muted);
+        }
+
+        /* ========== 底部提示词区块：高端对比 ========== */
+        .prompt-section {
+            display: grid;
+            grid-template-columns: minmax(190px, .6fr) 1.4fr;
+            gap: 32px;
+            margin: 78px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #1e293b, #312e81);
+            color: #e2e8f0;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(30, 41, 59, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .prompt-section::after {
+            content: "";
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: 0;
+        }
+        .prompt-section h2 {
+            color: #fff;
+            position: relative;
+            z-index: 1;
+        }
+        .prompt-section blockquote {
+            margin: 0;
+            padding-left: 24px;
+            border-left: 3px solid var(--accent-light);
+            color: #cbd5e1;
+            font-size: 15px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========== 页脚 ========== */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 24px 0 40px;
+            color: var(--muted);
+            border-top: 1px solid rgba(99, 102, 241, 0.1);
+            font-size: 13px;
+        }
+
+        /* ========== 响应式适配 ========== */
+        @media (max-width: 760px) {
+            .page-shell { width: min(100% - 28px, 600px); }
+            .topbar { align-items: flex-start; flex-direction: column; gap: 12px; }
+            .lesson-grid, .prompt-section { grid-template-columns: 1fr; }
+            .section-heading, .footer { align-items: flex-start; flex-direction: column; }
+            .prompt-section { gap: 20px; padding: 28px; }
+            .hero { padding: 40px 24px; }
+        }
+    </style>
 </head>
 <body>
-  <main class="wrap">
-    <header>
-      <div>
-        <h1>赵雨欣的《高级网页设计》课堂实践</h1>
-        <p class="lead">课堂目录与页面索引 — 使用原生代码，本页美化且包含本提示词。</p>
-      </div>
-      <div class="muted">课堂练习 • 本地静态页</div>
-    </header>
-
-    <div class="grid">
-      <section class="card nav">
-        <h2>课堂目录</h2>
-        <p class="muted">（尝试列出本目录下的所有 .html 文件；若直接用文件打开或服务器禁止索引，显示固定入口）</p>
-        <input id="search" class="search" placeholder="搜索或筛选页面（例如：HTML、自我介绍）">
-        <div class="count" id="count">已发现 0 个页面</div>
-        <nav id="links" aria-label="课程目录">
-          <div class="list" id="file-list">
-            <!-- 列表由脚本以卡片形式填充 -->
-          </div>
-        </nav>
-      </section>
-
-      <aside class="card">
-        <h3>说明</h3>
-        <p class="muted">已包含：HTML基础、自我介绍网页。其他模块后续增加。</p>
-        <h4 style="margin-top:12px">本提示词（已嵌入页面）</h4>
-        <pre class="prompt" id="user-prompt">创建一个新页面，包括本目录下的所有网页的超链接，使用原生代码，不使用cdn，新页面名称为index.html，主题为赵雨欣的《高级网页设计》课堂实践，美化页面，课堂目录中包含HTML基础、自我介绍网页、其余模块后续在增加。页面中包括本提示词。</pre>
-      </aside>
+    <div class="page-shell">
+        <header class="topbar">
+            <div class="signature">ZHAO YUXIN / 2026—2027</div>
+            <a href="#lessons">查看课堂目录 ↓</a>
+        </header>
+        <main>
+            <section class="hero" aria-labelledby="page-title">
+                <p class="eyebrow">CLASS PRACTICE / 001</p>
+                <h1 id="page-title">赵雨欣的<br>高级网页设计</h1>
+                <p class="hero-copy">把课堂上的每一次练习，整理成一个持续生长的网页档案。这里记录 HTML、CSS 与界面设计的学习足迹。</p>
+            </section>
+            <section id="lessons" aria-labelledby="lessons-title">
+                <div class="section-heading">
+                    <h2 id="lessons-title">课堂目录</h2>
+                    <p class="section-note">已完成 9 个模块 · 持续更新中</p>
+                </div>
+                <div class="lesson-grid">
+                    <a class='lesson-card' href='zyx.html'>
+                        <div>
+                            <span class="lesson-number">01</span>
+                            <h3>HTML 基础</h3>
+                            <p>标题、段落、图片、列表、表格、表单与 HTML5 语义标签。</p>
+                        </div>
+                        <span class="card-link">进入练习 →</span>
+                    </a>
+                    <a class='lesson-card' href='zwjs.html'>
+                        <div>
+                            <span class="lesson-number">02</span>
+                            <h3>自我介绍网页</h3>
+                            <p>使用语义化结构组织个人信息，练习页面内容与层次表达。</p>
+                        </div>
+                        <span class="card-link">进入练习 →</span>
+                    </a>
+                    <a class='lesson-card' href='stack029.html'>
+                        <div>
+                            <span class="lesson-number">03</span>
+                            <h3>层叠与继承 + 盒模型</h3>
+                            <p>练习 CSS 层叠规则、继承机制与盒模型，掌握 margin、padding、border 与宽高的计算方式。</p>
+                        </div>
+                        <span class="card-link">进入练习 →</span>
+                    </a>
+                    <a class='lesson-card' href='picture.text029.html'>
+                        <div>
+                            <span class="lesson-number">04</span>
+                            <h3>上图下文</h3>
+                            <p>练习图片与文字的组合布局，认识列表与 Flex 排版方式。</p>
+                        </div>
+                        <span class="card-link">进入练习 →</span>
+                    </a>
+                    <a class='lesson-card' href='1029.html'>
+                        <div>
+                            <span class="lesson-number">05</span>
+                            <h3>网页整体布局</h3>
+                            <p>使用 header、nav、main、aside 与 footer 组织网页整体结构。</p>
+                        </div>
+                        <span class="card-link">进入练习 →</span>
+                    </a>
+                    <a class='lesson-card' href='total029.html'>
+                        <div>
+                            <span class="lesson-number">06</span>
+                            <h3>网页整体布局课后作业</h3>
+                            <p>Flex两栏布局、子绝父相、overflow裁切、transform缩放动画、奇数卡片特殊效果，附带回到顶部功能。</p>
+                        </div>
+                        <span class="card-link">进入练习 →</span>
+                    </a>
+                    <a class='lesson-card' href='css3029.html'>
+                        <div>
+                            <span class="lesson-number">07</span>
+                            <h3>CSS3 选择器 + animation</h3>
+                            <p>练习结构选择器、伪类与动画，结合 hover、transform、box-shadow 与 keyframes 制作动态卡片效果。</p>
+                        </div>
+                        <span class="card-link">进入练习 →</span>
+                    </a>
+                    <a class='lesson-card' href='Grid029.html'>
+                        <div>
+                            <span class="lesson-number">08</span>
+                            <h3>Grid 网格布局</h3>
+                            <p>练习 CSS Grid 布局、列模板、区域划分与响应式栅格组合。</p>
+                        </div>
+                        <span class="card-link">进入练习 →</span>
+                    </a>
+                    <a class='lesson-card' href='svg029.html'>
+                        <div>
+                            <span class="lesson-number">09</span>
+                            <h3>SVG 图标</h3>
+                            <p>使用 SVG 进行图形绘制与图标样式设计，练习可缩放矢量图的创意表达。</p>
+                        </div>
+                        <span class="card-link">进入练习 →</span>
+                    </a>
+                    <div class="lesson-card upcoming">
+                        <div>
+                            <span class="lesson-number">10</span>
+                            <h3>后续模块</h3>
+                            <p>新的课堂实践将在这里继续添加，目录会随学习进度不断扩展。</p>
+                        </div>
+                        <span class="card-link">COMING SOON</span>
+                    </div>
+                </div>
+            </section>
+            <section class="prompt-section" aria-labelledby="prompt-title">
+                <h2 id="prompt-title">本次提示词</h2>
+                <blockquote>创建一个新页面，包括本目录下的所有网页的超链接，使用原生代码，不使用cdn，新页面名称为index.html，主题为王垚的《高级网页设计》课堂实践，美化页面，课堂目录中包含HTML基础、自我介绍网页、其余模块后续在增加。页面中包括本提示词。</blockquote>
+            </section>
+        </main>
+        <footer class="footer">
+            <span>高级网页设计 · 课堂实践档案</span>
+            <span>Made with HTML &amp; CSS</span>
+        </footer>
     </div>
-
-    <footer>
-      <p class="muted">提示：若将此目录放到静态服务器（如简单的 Python http.server），目录自动检测效果最佳。</p>
-    </footer>
-  </main>
-
-  <script>
-    (function(){
-      const container = document.getElementById('file-list');
-      const countEl = document.getElementById('count');
-      const search = document.getElementById('search');
-      const seen = new Map();
-
-      function makeCard(name, href){
-        const div = document.createElement('div');
-        div.className = 'item';
-        const svgNS = 'http://www.w3.org/2000/svg';
-        const svg = document.createElementNS(svgNS,'svg');
-        svg.setAttribute('viewBox','0 0 24 24');
-        svg.innerHTML = '<path fill="white" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" />';
-        const link = document.createElement('a');
-        link.href = href;
-        link.textContent = name;
-        const meta = document.createElement('div');
-        meta.className = 'meta';
-        meta.textContent = href;
-        div.appendChild(svg);
-        const col = document.createElement('div');
-        col.style.display='flex';
-        col.style.flexDirection='column';
-        col.appendChild(link);
-        col.appendChild(meta);
-        div.appendChild(col);
-        return div;
-      }
-
-      function addLink(name, href){
-        if(!href) return;
-        if(seen.has(href)) return;
-        seen.set(href,name||href);
-        const card = makeCard(name||href, href);
-        container.appendChild(card);
-        updateCount();
-      }
-
-      function updateCount(){
-        countEl.textContent = `已发现 ${seen.size} 个页面`;
-      }
-
-      function filterList(q){
-        q = (q||'').trim().toLowerCase();
-        Array.from(container.children).forEach(item=>{
-          const text = item.innerText.toLowerCase();
-          item.style.display = text.includes(q) ? '' : 'none';
-        });
-      }
-
-      // 固定入口
-      addLink('HTML基础','html_basics.html');
-      addLink('自我介绍网页','zwjs.html');
-
-      // 尝试读取目录（服务器目录索引）
-      async function tryFetchDirectory(){
-        try{
-          const resp = await fetch(location.pathname, {cache:'no-store'});
-          if(!resp.ok) throw new Error('no-dir');
-          const text = await resp.text();
-          const doc = new DOMParser().parseFromString(text,'text/html');
-          const anchors = Array.from(doc.querySelectorAll('a[href]'));
-          anchors.forEach(a=>{
-            const href = a.getAttribute('href');
-            if(!href) return;
-            if(/\.html?$/.test(href)){
-              if(href === '../' || href === '/') return;
-              addLink(a.textContent.trim() || href, href);
-            }
-          });
-        }catch(e){
-          console.debug('目录检测失败：', e.message);
-        }
-      }
-
-      search.addEventListener('input', ()=>filterList(search.value));
-      tryFetchDirectory();
-    })();
-  </script>
 </body>
 </html>

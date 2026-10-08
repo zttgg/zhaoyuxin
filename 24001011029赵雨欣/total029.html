@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>H5语义布局 + 溢出/隐藏过渡动画 实践作业</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Microsoft YaHei",sans-serif;min-height:100vh;display:flex;flex-direction:column;background:#f6f4fb;color:#374151}
+header{background:linear-gradient(135deg,#5b21b6,#7c3aed);color:#fff;padding:28px 20px;text-align:center}
+header h1{font-size:24px;letter-spacing:1px}
+nav{background:#2e1065;padding:12px;display:flex;justify-content:center;gap:30px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+nav a{color:#e9d5ff;text-decoration:none;padding:6px 14px;border-radius:6px;transition:.3s}
+nav a:hover{color:#fff;background:#7c3aed}
+.layout-wrap{max-width:1100px;margin:20px auto;padding:0 10px}
+main{background:#fff;padding:24px;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+aside{background:#f5f3ff;padding:20px 24px;border-radius:12px;margin-top:16px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+footer{background:#2e1065;color:#fff;text-align:center;padding:16px;margin-top:auto}
+h2{font-size:20px;color:#5b21b6;margin:16px 0 10px;padding-bottom:8px;border-bottom:2px solid #ede9fe}
+h3{font-size:15px;color:#6d28d9;margin:14px 0 8px;padding-left:8px;border-left:3px solid #7c3aed}
+p{font-size:14px;line-height:1.8;margin-bottom:6px}
+code{font-family:Consolas,monospace;background:#f5f3ff;color:#6d28d9;padding:1px 6px;border-radius:4px;font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:14px}
+th,td{border:1px solid #ede9fe;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#f5f3ff;color:#5b21b6;white-space:nowrap}
+pre{background:#2e1065;color:#ede9fe;padding:12px;border-radius:8px;overflow-x:auto;margin-bottom:14px;font:12.5px/1.6 Consolas,monospace}
+pre code{background:none;color:inherit;padding:0}
+.box{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px}
+.box li{list-style:none;flex:1 1 300px;height:180px;position:relative;overflow:hidden;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.12);cursor:pointer}
+.box img{width:100%;height:100%;object-fit:cover;display:block;transition:.6s}
+.box li:hover{box-shadow:0 8px 22px rgba(124,58,237,.28)}
+.box li:hover img{transform:scale(1.2)}
+.txt{position:absolute;left:0;bottom:0;width:100%;height:60px;padding:8px 12px;text-align:center;background:rgba(46,16,101,.82);color:#fff;opacity:0;transform:translateY(12px);transition:.4s}
+.txt h4{font-size:15px;margin-bottom:3px}
+.txt p{font-size:12px;line-height:1.4;margin:0;opacity:.9}
+.box li:hover .txt{opacity:1;transform:translateY(0)}
+.box li:nth-child(odd):hover .txt{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.back-top{position:fixed;left:20px;bottom:20px;width:50px;height:50px;border-radius:50%;background:#7c3aed;color:#fff;text-align:center;line-height:50px;text-decoration:none;opacity:.5;z-index:999;transition:.3s}
+.back-top:hover{opacity:1;transform:scale(1.1)}
+
+.hw-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+<body>
+<header id="top"><h1>H5语义布局 + 溢出/隐藏过渡动画 实践作业</h1></header>
+<nav>
+    <a href="#">首页</a><a href="#">课程练习</a><a href="#">关于</a>
+</nav>
+
+<div class="layout-wrap">
+<main>
+    <h2>第一部分：看代码找错（3处bug）</h2>
+    <table>
+        <tr><th>问题</th><th>原因</th><th>修正</th></tr>
+        <tr><td>放大图片溢出卡片、遮挡相邻卡片</td><td><code>.box li</code> 未设 <code>overflow:hidden</code></td><td><code>.box li{overflow:hidden}</code></td></tr>
+        <tr><td>只有移入有动画，移出没有</td><td><code>transition</code> 写在了 <code>:hover</code> 里，移出后规则失效</td><td>把 <code>transition</code> 移到 <code>.box img</code> 默认态</td></tr>
+        <tr><td>卡片挤压、排列错乱</td><td><code>.box</code> 缺少 <code>flex-wrap:wrap</code></td><td><code>.box{flex-wrap:wrap}</code></td></tr>
+    </table>
+    <h3>修复后完整 CSS</h3>
+    <pre><code>.box{display:flex;flex-wrap:wrap;gap:10px}
+.box li{width:300px;overflow:hidden;position:relative}
+.box img{width:100%;display:block;transition:all .6s}
+.box li:hover img{transform:scale(1.2)}
+.txt{position:absolute;left:0;right:0;bottom:0;height:40px;background:rgba(0,0,0,.6)}</code></pre>
+
+    <h2>第二部分：补全代码</h2>
+    <h3>2.1 语义标签填空</h3>
+    <table>
+        <tr><th>页面位置</th><th>语义标签</th></tr>
+        <tr><td>顶部头部区域</td><td><code>&lt;header&gt;</code></td></tr>
+        <tr><td>导航条</td><td><code>&lt;nav&gt;</code></td></tr>
+        <tr><td>唯一主要内容区</td><td><code>&lt;main&gt;</code></td></tr>
+        <tr><td>侧边栏附属内容</td><td><code>&lt;aside&gt;</code></td></tr>
+        <tr><td>底部版权页脚</td><td><code>&lt;footer&gt;</code></td></tr>
+    </table>
+
+    <h3>2.2 卡片动画补全</h3>
+    <table>
+        <tr><th>效果</th><th>关键 CSS / 答案</th></tr>
+        <tr><td>防止放大图片溢出 li</td><td><code>overflow:hidden</code></td></tr>
+        <tr><td>文字条定位卡片底部（子绝父相）</td><td>li：<code>position:relative</code>；文字条：<code>position:absolute;bottom:0</code></td></tr>
+        <tr><td>hover 放大到 scale(1.2)</td><td>默认 <code>.box img{transition:.6s}</code> + 悬浮 <code>.box li:hover img{transform:scale(1.2)}</code></td></tr>
+        <tr><td>transition 写在默认态还是 hover 态？</td><td>写在<strong>默认态</strong>。写在 hover 上，移出后规则失效、过渡中断，样式立即还原，没有移出动画。</td></tr>
+        <tr><td>奇数卡片文字铺满整卡</td><td><code>:nth-child(odd)</code></td></tr>
+    </table>
+    <p>演示区（悬停查看：图片放大被裁切、文字条展开，第 1/3/5 张文字铺满整卡）：</p>
+    <ul class="box">
+        <li><img src="img/1.jpg" alt="flex布局"><div class="txt"><h4>flex布局</h4><p>flex 两栏，间距用 gap，禁用 float。</p></div></li>
+        <li><img src="img/2.jpg" alt="语义标签"><div class="txt"><h4>语义标签</h4><p>头部、导航、主体、侧栏、页脚。</p></div></li>
+        <li><img src="img/3.jpg" alt="子绝父相"><div class="txt"><h4>子绝父相</h4><p>父 relative，子 absolute 贴底。</p></div></li>
+        <li><img src="img/4.jpg" alt="overflow裁切"><div class="txt"><h4>overflow裁切</h4><p>放大图片被限定在卡片内。</p></div></li>
+        <li><img src="img/5.jpg" alt="transition过渡"><div class="txt"><h4>transition过渡</h4><p>写在默认选择器，双向都有动画。</p></div></li>
+        <li><img src="img/6.jpg" alt="transform缩放"><div class="txt"><h4>transform缩放</h4><p>只改视觉，不改文档流占位。</p></div></li>
+    </ul>
+
+    <h3>2.3 flex两栏布局</h3>
+    <p>父容器：<code>display:flex</code>；间隙：<code>gap:8px</code>（禁止 margin）；版心 1200px = 主内容 792px + 间隙 8px + 侧边栏 400px。</p>
+
+    <h2>第三部分：手写原理简答</h2>
+    <img src="handwriting.jpg" alt="手写原理简答" class="hw-img">
+
+    <h2>第四部分：扩展挑战（回到顶部）</h2>
+    <pre><code>&lt;a class="back-top" href="#top"&gt;↑&lt;/a&gt;
+
+.back-top{position:fixed;left:20px;bottom:24px;width:48px;height:48px;
+  border-radius:50%;background:#7c3aed;color:#fff;opacity:.5;transition:.3s;z-index:999}
+.back-top:hover{opacity:1;transform:scale(1.1)}</code></pre>
+</main>
+
+<aside>
+    <h2>本页实现要点速查</h2>
+    <p>① 五个语义标签：<code>header</code> / <code>nav</code> / <code>main</code> / <code>aside</code> / <code>footer</code>。</p>
+    <p>② 卡片动画：子绝父相 + <code>overflow:hidden</code> 裁切 + <code>transition</code> 写在默认态 + <code>transform:scale(1.2)</code> + <code>:nth-child(odd)</code>。</p>
+    <p>③ 两栏布局：<code>display:flex</code> + <code>gap:8px</code>，全程无 float。</p>
+    <p>④ 回到顶部：纯 CSS（<code>position:fixed</code> + <code>opacity</code> + <code>z-index</code>）。</p>
+</aside>
+</div>
+
+<footer><p>高级网页设计实践作业｜赵雨欣</p></footer>
+<a href="#top" class="back-top">↑</a>
+</body>
+</html>

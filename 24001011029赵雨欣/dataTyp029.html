@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS31028</title>
+    <link rel="stylesheet" href="./dataTyp029.css">
+</head>
+<body>
+    <div class="container">
+    <!-- -->
+    </div>
+    <script>
+        var a = 10,b=4;
+        //控制台输出
+        console.log(a++);
+        console.log(a-b>0?a:b);
+        console.log(true&&false,true||false,!true);
+        var str = "hello world",num = 10,ble = true,
+        ud,boj={name:"张三",age:20},arr=[1,2,3,4,5];
+        console.log(typeof str,typeof num,typeof ble,typeof ud,
+        typeof boj,typeof arr);
+        //浮点小数不能用二进制精确存储，
+        //JS不能用==或者==来判断两个浮点数是否相等
+        console.log(0.1+0.2==0.3);
+        //数据类型转换，+将数字转换成字符串，-用能用于数值运算
+        console.log('1'+1,1-'1','11'+1-1);
+        //NaN表示不是一个数字，isNaN()判断是否是一个数字
+        //NaN和任何变量都不相等，包括它自己
+        console.log("wuhuan"-1);
+        console.log(NaN==NaN);
+        //parseInt()向下取整
+        console.log(parseInt(12.9));
+        //如何判定一个数值是不是整数？你有什么方法
+        //写一个数7游戏，100个数以内，包含7或者7的倍数不显示
+          // 1. 在网页中插入样式，实现绿色卡片和深色背景效果
+        document.write('<style> \
+            body { background-color: #1e1e1e; color: white; font-family: sans-serif; padding: 30px; } \
+            .title { color: #4db8c9; margin-bottom: 20px; } \
+            .card-container { display: flex; flex-wrap: wrap; gap: 8px; } \
+            .card { background-color: #4db8c9; color: #1e1e1e; padding: 8px 12px; border-radius: 4px; font-weight: bold; } \
+        </style>');
+
+        // 2. 打印标题
+        document.write('<h2 class="title">🎮 数7游戏 (1-100以内，排除含7或7的倍数)</h2>');
+        document.write('<div class="card-container">'); // 开始数字卡片容器
+
+        // 3. 循环计算并直接生成 HTML 卡片
+        for(let i = 1; i <= 100; i++){
+            const hasSeven = String(i).includes('7'); 
+            const isMultipleOfSeven = i % 7 === 0; 
+            
+            // 如果既不包含7，也不是7的倍数，就生成一个卡片
+            if (!hasSeven && !isMultipleOfSeven) {
+                document.write('<div class="card">' + i + '</div>');
+            }
+        }
+
+        document.write('</div>'); // 结束数字卡片容器
+    </script>
+</body>
+</html>

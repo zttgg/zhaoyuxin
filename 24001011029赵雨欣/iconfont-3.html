@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Remix Icon · 字体图标底部导航</title>
+<link rel="stylesheet" href="font/remixicon.css">
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:#0b0f1a;color:#e5e7eb;
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  /* ===== 背景 ===== */
+  .zyx1029_bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .zyx1029_bg::before,.zyx1029_bg::after{
+    content:'';position:absolute;width:640px;height:640px;border-radius:50%;filter:blur(150px);opacity:.32;
+  }
+  .zyx1029_bg::before{background:radial-gradient(circle,#6366f1,transparent 60%);top:-260px;left:-200px}
+  .zyx1029_bg::after{background:radial-gradient(circle,#a855f7,transparent 60%);bottom:-300px;right:-200px}
+
+  /* ===== 手机舞台（桌面端居中预览） ===== */
+  .zyx1029_stage{
+    max-width:480px;margin:0 auto;min-height:100dvh;
+    display:flex;flex-direction:column;position:relative;
+  }
+  @media (min-width:520px){
+    .zyx1029_stage{
+      border-left:1px solid rgba(255,255,255,.07);
+      border-right:1px solid rgba(255,255,255,.07);
+      box-shadow:0 0 80px rgba(99,102,241,.12);
+    }
+  }
+
+  /* ===== 顶栏 ===== */
+  .zyx1029_topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:10px;
+    padding:calc(12px + env(safe-area-inset-top)) 16px 12px;
+    background:rgba(11,15,26,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .zyx1029_back{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;flex:none;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+    color:#cbd5e1;text-decoration:none;font-size:16px;transition:all .22s ease;
+  }
+  .zyx1029_back:hover{background:rgba(129,140,248,.18);border-color:rgba(129,140,248,.45);color:#e0e7ff}
+  .zyx1029_topbar h1{font-size:16px;font-weight:600;letter-spacing:-.01em;margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .zyx1029_topbar .zyx1029_ver{font-size:11px;color:#64748b;flex:none;font-family:Consolas,monospace}
+
+  /* ===== 内容区 ===== */
+  .zyx1029_main{flex:1;padding:20px 16px calc(96px + env(safe-area-inset-bottom))}
+
+  .zyx1029_hero{
+    background:linear-gradient(135deg,rgba(99,102,241,.22),rgba(168,85,247,.14));
+    border:1px solid rgba(129,140,248,.28);
+    border-radius:18px;padding:22px 18px;margin-bottom:18px;
+    animation:zyx1029_up .6s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .zyx1029_hero h2{margin:0 0 6px;font-size:20px;font-weight:700;color:#f1f5f9}
+  .zyx1029_hero p{margin:0;font-size:13px;line-height:1.7;color:#a5b4fc}
+  @keyframes zyx1029_up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  .zyx1029_card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;padding:18px 16px;margin-bottom:14px;
+    animation:zyx1029_up .6s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .zyx1029_card:nth-of-type(1){animation-delay:.08s}
+  .zyx1029_card:nth-of-type(2){animation-delay:.16s}
+  .zyx1029_card:nth-of-type(3){animation-delay:.24s}
+  .zyx1029_card h3{
+    margin:0 0 8px;font-size:14px;font-weight:600;color:#e2e8f0;
+    display:flex;align-items:center;gap:8px;
+  }
+  .zyx1029_card h3 .zyx1029_chip{
+    font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 8px;border-radius:5px;flex:none;
+  }
+  .zyx1029_chip-num{background:rgba(244,63,94,.16);color:#fb7185;border:1px solid rgba(244,63,94,.3)}
+  .zyx1029_chip-dot{background:rgba(245,158,11,.16);color:#fbbf24;border:1px solid rgba(245,158,11,.3)}
+  .zyx1029_chip-font{background:rgba(129,140,248,.16);color:#a5b4fc;border:1px solid rgba(129,140,248,.3)}
+  .zyx1029_card p{margin:0;font-size:12.5px;line-height:1.75;color:#94a3b8}
+  .zyx1029_card code{
+    font-family:Consolas,monospace;font-size:11px;color:#c4b5fd;
+    background:rgba(99,102,241,.12);padding:1px 5px;border-radius:4px;
+  }
+
+  /* 徽章演示按钮 */
+  .zyx1029_demo-btns{display:flex;gap:10px;margin-top:12px}
+  .zyx1029_demo-btn{
+    flex:1;padding:9px 0;border-radius:10px;border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.05);color:#cbd5e1;font-size:12.5px;font-weight:500;
+    cursor:pointer;transition:all .22s ease;font-family:inherit;
+  }
+  .zyx1029_demo-btn:hover{border-color:rgba(129,140,248,.5);background:rgba(99,102,241,.15);color:#e0e7ff}
+  .zyx1029_demo-btn:active{transform:scale(.97)}
+
+  /* ===== 底部导航（固定 · flex 等分自适应宽度） ===== */
+  .zyx1029_tabbar{
+    position:fixed;bottom:0;left:0;right:0;z-index:100;
+    background:rgba(13,17,32,.86);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:6px 0 calc(6px + env(safe-area-inset-bottom));
+  }
+  @media (min-width:520px){
+    .zyx1029_tabbar{left:auto;right:auto;width:100%;max-width:480px;margin:0 auto;left:50%;transform:translateX(-50%)}
+  }
+  .zyx1029_tabs{display:flex;max-width:480px;margin:0 auto}
+  .zyx1029_tab{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:5px 0 3px;border:0;background:none;cursor:pointer;
+    color:#64748b;font-family:inherit;transition:color .25s ease,transform .25s ease;
+  }
+  .zyx1029_tab:active{transform:scale(.94)}
+  .zyx1029_tab-icon{position:relative;font-size:24px;height:26px;line-height:26px;transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+  .zyx1029_tab-label{font-size:10.5px;font-weight:500;letter-spacing:.02em}
+  .zyx1029_tab.zyx1029_active{color:#a5b4fc}
+  .zyx1029_tab.zyx1029_active .zyx1029_tab-icon{transform:translateY(-2px) scale(1.08);filter:drop-shadow(0 0 8px rgba(129,140,248,.65))}
+  .zyx1029_tab.zyx1029_active .zyx1029_tab-label{font-weight:600}
+  .zyx1029_tab.zyx1029_active::after{
+    content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+    width:20px;height:3px;border-radius:0 0 4px 4px;
+    background:linear-gradient(90deg,#818cf8,#c084fc);
+  }
+
+  /* ===== 数字徽章 ===== */
+  .zyx1029_badge{
+    position:absolute;top:-7px;right:-15px;
+    min-width:17px;height:17px;padding:0 4px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#f43f5e,#fb7185);
+    color:#fff;font-size:9.5px;font-weight:700;font-style:normal;
+    font-family:Consolas,monospace;line-height:1;
+    box-shadow:0 0 0 2.5px rgba(13,17,32,.92),0 2px 6px rgba(244,63,94,.45);
+    animation:zyx1029_pop .35s cubic-bezier(.2,1.4,.4,1) both;
+  }
+  /* ===== 红点 ===== */
+  .zyx1029_dot{
+    position:absolute;top:-2px;right:-9px;
+    width:8px;height:8px;border-radius:50%;
+    background:linear-gradient(135deg,#f43f5e,#fb7185);
+    box-shadow:0 0 0 2.5px rgba(13,17,32,.92),0 0 8px rgba(244,63,94,.6);
+    animation:zyx1029_pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes zyx1029_pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+  @keyframes zyx1029_pulse{
+    0%,100%{transform:scale(1);opacity:1}
+    50%{transform:scale(1.25);opacity:.75}
+  }
+
+  .zyx1029_footnote{
+    text-align:center;font-size:11px;color:#475569;padding:8px 0 18px;letter-spacing:.04em;
+  }
+</style>
+</head>
+<body>
+
+<div class="zyx1029_bg"></div>
+
+<div class="zyx1029_stage">
+
+  <header class="zyx1029_topbar">
+    <a class="zyx1029_back" href="index.html" title="返回首页"><i class="ri-arrow-left-line"></i></a>
+    <h1>字体图标 · 底部导航</h1>
+    <span class="zyx1029_ver">RemixIcon 4.5.0</span>
+  </header>
+
+  <main class="zyx1029_main">
+
+    <section class="zyx1029_hero">
+      <h2>移动端 TabBar</h2>
+      <p>4 个导航项 · <b>flex: 1 等分自适应宽度</b> · 固定于底部 · 使用 Remix Icon 字体图标（CSS 类名方式）</p>
+    </section>
+
+    <section class="zyx1029_card">
+      <h3><span class="zyx1029_chip zyx1029_chip-num">Badge</span>数字徽章</h3>
+      <p>消息 Tab 右上角的数字徽章，超过 99 显示 <code>99+</code>。点击下方按钮可实时增减：</p>
+      <div class="zyx1029_demo-btns">
+        <button class="zyx1029_demo-btn" id="zyx1029_btnAdd" type="button">+1 新消息</button>
+        <button class="zyx1029_demo-btn" id="zyx1029_btnClear" type="button">清空未读</button>
+      </div>
+    </section>
+
+    <section class="zyx1029_card">
+      <h3><span class="zyx1029_chip zyx1029_chip-dot">Dot</span>红点提醒</h3>
+      <p>发现 Tab 右上角的 8px 红点，带呼吸脉冲动画，用于弱提醒（无需数字）。</p>
+    </section>
+
+    <section class="zyx1029_card">
+      <h3><span class="zyx1029_chip zyx1029_chip-font">Font</span>字体图标方式</h3>
+      <p>通过 CSS 类名调用：<code>&lt;i class="ri-home-5-line"&gt;</code>，选中态切换为 Fill 风格 <code>ri-home-5-fill</code>，图标随字体渲染，改色只需 <code>color</code>。</p>
+    </section>
+
+    <p class="zyx1029_footnote">font/remixicon.css + remixicon.woff2 · 本地字体</p>
+
+  </main>
+
+  <!-- 底部导航：固定 · 4 项 · flex 等分自适应 -->
+  <nav class="zyx1029_tabbar" id="zyx1029_tabbar">
+    <div class="zyx1029_tabs">
+
+      <button class="zyx1029_tab zyx1029_active" type="button" data-zyx1029-icon="home-5">
+        <span class="zyx1029_tab-icon"><i class="ri-home-5-fill"></i></span>
+        <span class="zyx1029_tab-label">首页</span>
+      </button>
+
+      <button class="zyx1029_tab" type="button" data-zyx1029-icon="compass-3">
+        <span class="zyx1029_tab-icon"><i class="ri-compass-3-line"></i><span class="zyx1029_dot"></span></span>
+        <span class="zyx1029_tab-label">发现</span>
+      </button>
+
+      <button class="zyx1029_tab" type="button" data-zyx1029-icon="message-3">
+        <span class="zyx1029_tab-icon"><i class="ri-message-3-line"></i><span class="zyx1029_badge" id="zyx1029_badge">99+</span></span>
+        <span class="zyx1029_tab-label">消息</span>
+      </button>
+
+      <button class="zyx1029_tab" type="button" data-zyx1029-icon="user-3">
+        <span class="zyx1029_tab-icon"><i class="ri-user-3-line"></i></span>
+        <span class="zyx1029_tab-label">我的</span>
+      </button>
+
+    </div>
+  </nav>
+
+</div>
+
+<script>
+  // ===== Tab 切换：line ↔ fill 字体类名 =====
+  var zyx1029_tabs = document.querySelectorAll('.zyx1029_tab');
+  zyx1029_tabs.forEach(function (zyx1029_tab) {
+    zyx1029_tab.addEventListener('click', function () {
+      zyx1029_tabs.forEach(function (zyx1029_t) {
+        zyx1029_t.classList.remove('zyx1029_active');
+        var zyx1029_i = zyx1029_t.querySelector('.zyx1029_tab-icon i');
+        var zyx1029_name = zyx1029_t.getAttribute('data-zyx1029-icon');
+        zyx1029_i.className = 'ri-' + zyx1029_name + '-line';
+      });
+      this.classList.add('zyx1029_active');
+      this.querySelector('.zyx1029_tab-icon i').className =
+        'ri-' + this.getAttribute('data-zyx1029-icon') + '-fill';
+    });
+  });
+
+  // ===== 数字徽章演示 =====
+  var zyx1029_badgeEl = document.getElementById('zyx1029_badge');
+  var zyx1029_count = 99; // 初始 99+
+  function zyx1029_renderBadge() {
+    if (zyx1029_count <= 0) {
+      zyx1029_badgeEl.style.display = 'none';
+    } else {
+      zyx1029_badgeEl.style.display = 'flex';
+      zyx1029_badgeEl.textContent = zyx1029_count > 99 ? '99+' : String(zyx1029_count);
+      zyx1029_badgeEl.style.animation = 'none';
+      void zyx1029_badgeEl.offsetWidth; /* 重启入场动画 */
+      zyx1029_badgeEl.style.animation = '';
+    }
+  }
+  document.getElementById('zyx1029_btnAdd').addEventListener('click', function () {
+    zyx1029_count = zyx1029_count <= 0 ? 1 : Math.min(zyx1029_count + 1, 999);
+    zyx1029_renderBadge();
+  });
+  document.getElementById('zyx1029_btnClear').addEventListener('click', function () {
+    zyx1029_count = 0;
+    zyx1029_renderBadge();
+  });
+</script>
+</body>
+</html>

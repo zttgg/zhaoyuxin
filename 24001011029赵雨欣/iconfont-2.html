@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lucide · SVG 图标画廊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=JetBrains+Mono+NL:wght@400;500&display=swap');
+
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter','Microsoft YaHei',system-ui,sans-serif;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+    background:#081317;
+    color:#e5e7eb;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ========== 背景 ========== */
+  .zyx1029_bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .zyx1029_bg::before,.zyx1029_bg::after{
+    content:'';position:absolute;width:780px;height:780px;border-radius:50%;filter:blur(160px);opacity:.32;
+  }
+  .zyx1029_bg::before{background:radial-gradient(circle,#14b8a6 0%,transparent 60%);top:-300px;left:-200px}
+  .zyx1029_bg::after{background:radial-gradient(circle,#0ea5e9 0%,transparent 60%);bottom:-320px;right:-180px}
+  .zyx1029_bg-grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(20,184,166,.055) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(20,184,166,.055) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(ellipse at center,#000 25%,transparent 72%);
+    -webkit-mask-image:radial-gradient(ellipse at center,#000 25%,transparent 72%);
+  }
+  .zyx1029_bg-noise{
+    position:absolute;inset:0;opacity:.035;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* ========== Header ========== */
+  .zyx1029_header{padding:72px 24px 40px;text-align:center;position:relative}
+  .zyx1029_header::after{
+    content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+    width:120px;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(45,212,191,.4),transparent);
+  }
+  .zyx1029_header h1{
+    font-size:clamp(28px,5vw,42px);font-weight:700;letter-spacing:-.02em;margin:0 0 12px;
+    background:linear-gradient(135deg,#ccfbf1 0%,#5eead4 35%,#2dd4bf 60%,#38bdf8 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .zyx1029_header h1 svg{vertical-align:-4px;margin-right:6px}
+  .zyx1029_subtitle{
+    font-size:14px;color:#7dd3fc;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:18px;
+  }
+  .zyx1029_meta{font-size:13px;color:#64748b;margin-bottom:22px}
+  .zyx1029_meta b{color:#cbd5e1;font-weight:500}
+  .zyx1029_back{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:10px 22px;border-radius:999px;
+    background:rgba(20,184,166,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border:1px solid rgba(45,212,191,.25);
+    color:#a7f3d0;text-decoration:none;font-size:13px;font-weight:500;
+    transition:all .25s ease;
+  }
+  .zyx1029_back:hover{
+    background:rgba(45,212,191,.16);border-color:rgba(94,234,212,.6);
+    color:#ccfbf1;transform:translateY(-1px);
+    box-shadow:0 8px 24px -8px rgba(20,184,166,.55);
+  }
+
+  /* ========== Container ========== */
+  .zyx1029_container{
+    flex:1;padding:48px 24px 64px;max-width:1280px;margin:0 auto;width:100%;
+  }
+
+  /* ========== Section ========== */
+  .zyx1029_section{margin-bottom:56px;animation:zyx1029_fadeUp .7s ease both}
+  @keyframes zyx1029_fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+  .zyx1029_section-head{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .zyx1029_section-tag{
+    display:inline-block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    padding:4px 10px;border-radius:6px;
+  }
+  .zyx1029_section h2{font-size:18px;font-weight:600;color:#f1f5f9;letter-spacing:-.01em;margin:0}
+  .zyx1029_section h2 small{display:block;font-size:12px;font-weight:400;color:#64748b;letter-spacing:.02em;margin-top:3px}
+
+  .zyx1029_section-basic   .zyx1029_section-tag{background:rgba(20,184,166,.15);color:#2dd4bf;border:1px solid rgba(20,184,166,.28)}
+  .zyx1029_section-media   .zyx1029_section-tag{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.28)}
+  .zyx1029_section-comm    .zyx1029_section-tag{background:rgba(244,63,94,.15);color:#fb7185;border:1px solid rgba(244,63,94,.28)}
+  .zyx1029_section-editor  .zyx1029_section-tag{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.28)}
+  .zyx1029_section-status  .zyx1029_section-tag{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.28)}
+  .zyx1029_section-inline  .zyx1029_section-tag{background:rgba(236,72,153,.15);color:#f472b6;border:1px solid rgba(236,72,153,.28)}
+
+  /* ========== Grid & Items ========== */
+  .zyx1029_grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(118px,1fr));
+    gap:12px;
+  }
+  .zyx1029_item{
+    position:relative;
+    background:rgba(255,255,255,.035);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:14px;
+    padding:22px 8px 14px;
+    text-align:center;cursor:default;overflow:hidden;
+    transition:transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease, background .28s ease;
+    animation:zyx1029_itemIn .5s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .zyx1029_item::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);opacity:0;transition:opacity .28s ease;
+  }
+  .zyx1029_item::after{
+    content:'';position:absolute;left:50%;top:50%;width:120%;height:120%;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(20,184,166,.0) 40%,transparent 65%);
+    opacity:0;transition:opacity .35s ease;
+    pointer-events:none;
+  }
+  .zyx1029_item:hover{
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.06);
+    border-color:rgba(255,255,255,.2);
+    box-shadow:0 14px 40px -12px rgba(0,0,0,.6);
+  }
+  .zyx1029_item:hover::before{opacity:1}
+  .zyx1029_item:hover::after{opacity:1}
+
+  @keyframes zyx1029_itemIn{
+    from{opacity:0;transform:translateY(12px) scale(.96)}
+    to{opacity:1;transform:none}
+  }
+
+  /* icon color */
+  .zyx1029_item svg{
+    width:30px;height:30px;margin-bottom:12px;position:relative;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), filter .3s ease;
+  }
+  .zyx1029_item:hover svg{transform:scale(1.1)}
+
+  .zyx1029_section-basic   .zyx1029_item svg{color:#2dd4bf}
+  .zyx1029_section-media   .zyx1029_item svg{color:#60a5fa}
+  .zyx1029_section-comm    .zyx1029_item svg{color:#fb7185}
+  .zyx1029_section-editor  .zyx1029_item svg{color:#c084fc}
+  .zyx1029_section-status  .zyx1029_item svg{color:#fbbf24}
+  .zyx1029_section-inline  .zyx1029_item svg{color:#f472b6}
+  .zyx1029_section-spin    .zyx1029_item svg{color:#5eead4;animation:zyx1029_spin 2s linear infinite}
+
+  .zyx1029_section-basic   .zyx1029_item:hover svg{filter:drop-shadow(0 0 10px rgba(45,212,191,.6))}
+  .zyx1029_section-media   .zyx1029_item:hover svg{filter:drop-shadow(0 0 10px rgba(96,165,250,.6))}
+  .zyx1029_section-comm    .zyx1029_item:hover svg{filter:drop-shadow(0 0 10px rgba(251,113,133,.55))}
+  .zyx1029_section-editor  .zyx1029_item:hover svg{filter:drop-shadow(0 0 10px rgba(192,132,252,.6))}
+  .zyx1029_section-status  .zyx1029_item:hover svg{filter:drop-shadow(0 0 10px rgba(251,191,36,.55))}
+  .zyx1029_section-inline  .zyx1029_item:hover svg{filter:drop-shadow(0 0 10px rgba(244,114,182,.6))}
+  .zyx1029_section-spin    .zyx1029_item:hover svg{filter:drop-shadow(0 0 14px rgba(94,234,212,.7))}
+
+  @keyframes zyx1029_spin{to{transform:rotate(360deg)}}
+
+  /* caption */
+  .zyx1029_item span{
+    font-family:'JetBrains Mono',Consolas,monospace;
+    font-size:10px;color:#64748b;letter-spacing:.02em;line-height:1.4;display:block;
+    transition:color .2s ease;
+  }
+  .zyx1029_item:hover span{color:#cbd5e1}
+
+  /* ========== Code Block ========== */
+  .zyx1029_code-wrap{
+    margin-top:18px;background:rgba(8,15,23,.75);
+    border:1px solid rgba(20,184,166,.2);
+    border-radius:12px;overflow:hidden;
+    backdrop-filter:blur(10px);
+  }
+  .zyx1029_code-head{
+    display:flex;align-items:center;gap:6px;padding:10px 14px;
+    border-bottom:1px solid rgba(20,184,166,.15);
+    background:rgba(15,23,42,.5);
+  }
+  .zyx1029_code-head span{width:10px;height:10px;border-radius:50%;display:block}
+  .zyx1029_code-head span:nth-child(1){background:#f87171}
+  .zyx1029_code-head span:nth-child(2){background:#fbbf24}
+  .zyx1029_code-head span:nth-child(3){background:#34d399}
+  .zyx1029_code-title{font-size:11px;color:#64748b;margin-left:10px;font-family:'JetBrains Mono',Consolas,monospace}
+  .zyx1029_code{
+    padding:16px 18px;font-family:'JetBrains Mono',Consolas,monospace;
+    font-size:12px;line-height:1.8;color:#cbd5e1;overflow-x:auto;
+  }
+  .zyx1029_code .k{color:#fbbf24;font-weight:500}
+  .zyx1029_code .s{color:#5eead4}
+  .zyx1029_code .c{color:#475569;font-style:italic}
+  .zyx1029_code .n{color:#c084fc}
+  .zyx1029_code .t{color:#60a5fa}
+
+  /* ========== Footer ========== */
+  .zyx1029_footer{
+    padding:32px 24px;text-align:center;
+    border-top:1px solid rgba(255,255,255,.06);
+    background:rgba(6,15,20,.6);backdrop-filter:blur(12px);
+    font-size:12px;color:#475569;letter-spacing:.04em;
+  }
+  .zyx1029_footer b{color:#64748b;font-weight:500}
+
+  @media (max-width:640px){
+    .zyx1029_grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px}
+    .zyx1029_item{padding:18px 6px 10px;border-radius:12px}
+    .zyx1029_item svg{width:26px;height:26px;margin-bottom:8px}
+  }
+</style>
+</head>
+<body>
+
+<div class="zyx1029_bg"><div class="zyx1029_bg-grid"></div><div class="zyx1029_bg-noise"></div></div>
+
+<header class="zyx1029_header">
+  <h1><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4"/></svg>Lucide SVG 图标画廊</h1>
+  <p class="zyx1029_subtitle">vector icons · v0.468.0 · two render modes</p>
+  <p class="zyx1029_meta">支持 <b>data-lucide + JS 渲染</b> 与 <b>直接内联 SVG</b> 两种方式</p>
+  <a class="zyx1029_back" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>返回首页</a>
+</header>
+
+<main class="zyx1029_container">
+
+  <section class="zyx1029_section zyx1029_section-basic">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Basic</span>
+      <h2>基础图标 <small>data-lucide + lucide.createIcons() · 最常见的一套</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item" style="animation-delay:.00s"><i data-lucide="home"></i><span>home</span></div>
+      <div class="zyx1029_item" style="animation-delay:.02s"><i data-lucide="user"></i><span>user</span></div>
+      <div class="zyx1029_item" style="animation-delay:.04s"><i data-lucide="mail"></i><span>mail</span></div>
+      <div class="zyx1029_item" style="animation-delay:.06s"><i data-lucide="phone"></i><span>phone</span></div>
+      <div class="zyx1029_item" style="animation-delay:.08s"><i data-lucide="search"></i><span>search</span></div>
+      <div class="zyx1029_item" style="animation-delay:.10s"><i data-lucide="settings"></i><span>settings</span></div>
+      <div class="zyx1029_item" style="animation-delay:.12s"><i data-lucide="heart"></i><span>heart</span></div>
+      <div class="zyx1029_item" style="animation-delay:.14s"><i data-lucide="star"></i><span>star</span></div>
+      <div class="zyx1029_item" style="animation-delay:.16s"><i data-lucide="bookmark"></i><span>bookmark</span></div>
+      <div class="zyx1029_item" style="animation-delay:.18s"><i data-lucide="calendar"></i><span>calendar</span></div>
+      <div class="zyx1029_item" style="animation-delay:.20s"><i data-lucide="clock"></i><span>clock</span></div>
+      <div class="zyx1029_item" style="animation-delay:.22s"><i data-lucide="camera"></i><span>camera</span></div>
+      <div class="zyx1029_item" style="animation-delay:.24s"><i data-lucide="image"></i><span>image</span></div>
+      <div class="zyx1029_item" style="animation-delay:.26s"><i data-lucide="music"></i><span>music</span></div>
+      <div class="zyx1029_item" style="animation-delay:.28s"><i data-lucide="folder"></i><span>folder</span></div>
+      <div class="zyx1029_item" style="animation-delay:.30s"><i data-lucide="download"></i><span>download</span></div>
+      <div class="zyx1029_item" style="animation-delay:.32s"><i data-lucide="upload"></i><span>upload</span></div>
+      <div class="zyx1029_item" style="animation-delay:.34s"><i data-lucide="trash-2"></i><span>trash-2</span></div>
+      <div class="zyx1029_item" style="animation-delay:.36s"><i data-lucide="plus"></i><span>plus</span></div>
+      <div class="zyx1029_item" style="animation-delay:.38s"><i data-lucide="minus"></i><span>minus</span></div>
+      <div class="zyx1029_item" style="animation-delay:.40s"><i data-lucide="check"></i><span>check</span></div>
+      <div class="zyx1029_item" style="animation-delay:.42s"><i data-lucide="x"></i><span>x</span></div>
+      <div class="zyx1029_item" style="animation-delay:.44s"><i data-lucide="arrow-right"></i><span>arrow-right</span></div>
+      <div class="zyx1029_item" style="animation-delay:.46s"><i data-lucide="arrow-left"></i><span>arrow-left</span></div>
+      <div class="zyx1029_item" style="animation-delay:.48s"><i data-lucide="arrow-up"></i><span>arrow-up</span></div>
+      <div class="zyx1029_item" style="animation-delay:.50s"><i data-lucide="arrow-down"></i><span>arrow-down</span></div>
+      <div class="zyx1029_item" style="animation-delay:.52s"><i data-lucide="menu"></i><span>menu</span></div>
+      <div class="zyx1029_item" style="animation-delay:.54s"><i data-lucide="bell"></i><span>bell</span></div>
+      <div class="zyx1029_item" style="animation-delay:.56s"><i data-lucide="lock"></i><span>lock</span></div>
+      <div class="zyx1029_item" style="animation-delay:.58s"><i data-lucide="unlock"></i><span>unlock</span></div>
+      <div class="zyx1029_item" style="animation-delay:.60s"><i data-lucide="globe"></i><span>globe</span></div>
+      <div class="zyx1029_item" style="animation-delay:.62s"><i data-lucide="map-pin"></i><span>map-pin</span></div>
+      <div class="zyx1029_item" style="animation-delay:.64s"><i data-lucide="wallet"></i><span>wallet</span></div>
+      <div class="zyx1029_item" style="animation-delay:.66s"><i data-lucide="shopping-cart"></i><span>shopping-cart</span></div>
+      <div class="zyx1029_item" style="animation-delay:.68s"><i data-lucide="credit-card"></i><span>credit-card</span></div>
+      <div class="zyx1029_item" style="animation-delay:.70s"><i data-lucide="pie-chart"></i><span>pie-chart</span></div>
+      <div class="zyx1029_item" style="animation-delay:.72s"><i data-lucide="bar-chart-2"></i><span>bar-chart-2</span></div>
+      <div class="zyx1029_item" style="animation-delay:.74s"><i data-lucide="trending-up"></i><span>trending-up</span></div>
+      <div class="zyx1029_item" style="animation-delay:.76s"><i data-lucide="trending-down"></i><span>trending-down</span></div>
+      <div class="zyx1029_item" style="animation-delay:.78s"><i data-lucide="activity"></i><span>activity</span></div>
+    </div>
+    <div class="zyx1029_code-wrap">
+      <div class="zyx1029_code-head">
+        <span></span><span></span><span></span>
+        <span class="zyx1029_code-title">方式一 · data-lucide + JS</span>
+      </div>
+      <pre class="zyx1029_code"><code><span class="c">// HTML</span>
+<span class="k">&lt;i</span> <span class="t">data-lucide</span>=<span class="s">"home"</span><span class="k">&gt;&lt;/i&gt;</span>
+
+<span class="c">// 初始化（页面加载后执行一次即可）</span>
+<span class="t">lucide</span>.<span class="n">createIcons</span>();</code></pre>
+    </div>
+  </section>
+
+  <section class="zyx1029_section zyx1029_section-media">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Media</span>
+      <h2>多媒体图标 <small>播放、音量、摄像头</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item" style="animation-delay:.00s"><i data-lucide="play"></i><span>play</span></div>
+      <div class="zyx1029_item" style="animation-delay:.02s"><i data-lucide="pause"></i><span>pause</span></div>
+      <div class="zyx1029_item" style="animation-delay:.04s"><i data-lucide="skip-back"></i><span>skip-back</span></div>
+      <div class="zyx1029_item" style="animation-delay:.06s"><i data-lucide="skip-forward"></i><span>skip-forward</span></div>
+      <div class="zyx1029_item" style="animation-delay:.08s"><i data-lucide="mic"></i><span>mic</span></div>
+      <div class="zyx1029_item" style="animation-delay:.10s"><i data-lucide="mic-off"></i><span>mic-off</span></div>
+      <div class="zyx1029_item" style="animation-delay:.12s"><i data-lucide="volume"></i><span>volume</span></div>
+      <div class="zyx1029_item" style="animation-delay:.14s"><i data-lucide="volume-2"></i><span>volume-2</span></div>
+      <div class="zyx1029_item" style="animation-delay:.16s"><i data-lucide="volume-x"></i><span>volume-x</span></div>
+      <div class="zyx1029_item" style="animation-delay:.18s"><i data-lucide="video"></i><span>video</span></div>
+      <div class="zyx1029_item" style="animation-delay:.20s"><i data-lucide="video-off"></i><span>video-off</span></div>
+      <div class="zyx1029_item" style="animation-delay:.22s"><i data-lucide="tv"></i><span>tv</span></div>
+    </div>
+  </section>
+
+  <section class="zyx1029_section zyx1029_section-comm">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Message</span>
+      <h2>通讯与消息 <small>聊天、发送、收件箱</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item" style="animation-delay:.00s"><i data-lucide="message-circle"></i><span>message-circle</span></div>
+      <div class="zyx1029_item" style="animation-delay:.02s"><i data-lucide="message-square"></i><span>message-square</span></div>
+      <div class="zyx1029_item" style="animation-delay:.04s"><i data-lucide="send"></i><span>send</span></div>
+      <div class="zyx1029_item" style="animation-delay:.06s"><i data-lucide="inbox"></i><span>inbox</span></div>
+      <div class="zyx1029_item" style="animation-delay:.08s"><i data-lucide="mail-check"></i><span>mail-check</span></div>
+      <div class="zyx1029_item" style="animation-delay:.10s"><i data-lucide="paperclip"></i><span>paperclip</span></div>
+      <div class="zyx1029_item" style="animation-delay:.12s"><i data-lucide="rss"></i><span>rss</span></div>
+      <div class="zyx1029_item" style="animation-delay:.14s"><i data-lucide="share-2"></i><span>share-2</span></div>
+    </div>
+  </section>
+
+  <section class="zyx1029_section zyx1029_section-editor">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Editor</span>
+      <h2>编辑工具 <small>复制、撤销、保存</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item" style="animation-delay:.00s"><i data-lucide="edit"></i><span>edit</span></div>
+      <div class="zyx1029_item" style="animation-delay:.02s"><i data-lucide="edit-3"></i><span>edit-3</span></div>
+      <div class="zyx1029_item" style="animation-delay:.04s"><i data-lucide="copy"></i><span>copy</span></div>
+      <div class="zyx1029_item" style="animation-delay:.06s"><i data-lucide="scissors"></i><span>scissors</span></div>
+      <div class="zyx1029_item" style="animation-delay:.08s"><i data-lucide="clipboard"></i><span>clipboard</span></div>
+      <div class="zyx1029_item" style="animation-delay:.10s"><i data-lucide="save"></i><span>save</span></div>
+      <div class="zyx1029_item" style="animation-delay:.12s"><i data-lucide="undo"></i><span>undo</span></div>
+      <div class="zyx1029_item" style="animation-delay:.14s"><i data-lucide="redo"></i><span>redo</span></div>
+    </div>
+  </section>
+
+  <section class="zyx1029_section zyx1029_section-status">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Feedback</span>
+      <h2>状态与反馈 <small>提示、警告、确认</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item" style="animation-delay:.00s"><i data-lucide="info"></i><span>info</span></div>
+      <div class="zyx1029_item" style="animation-delay:.02s"><i data-lucide="alert-triangle"></i><span>alert-triangle</span></div>
+      <div class="zyx1029_item" style="animation-delay:.04s"><i data-lucide="alert-circle"></i><span>alert-circle</span></div>
+      <div class="zyx1029_item" style="animation-delay:.06s"><i data-lucide="check-circle"></i><span>check-circle</span></div>
+      <div class="zyx1029_item" style="animation-delay:.08s"><i data-lucide="x-circle"></i><span>x-circle</span></div>
+      <div class="zyx1029_item" style="animation-delay:.10s"><i data-lucide="help-circle"></i><span>help-circle</span></div>
+      <div class="zyx1029_item" style="animation-delay:.12s"><i data-lucide="thumbs-up"></i><span>thumbs-up</span></div>
+      <div class="zyx1029_item" style="animation-delay:.14s"><i data-lucide="thumbs-down"></i><span>thumbs-down</span></div>
+    </div>
+  </section>
+
+  <section class="zyx1029_section zyx1029_section-spin">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Animate</span>
+      <h2>旋转 / 加载 <small>通过 CSS animation 控制 SVG 动画</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item"><i data-lucide="loader"></i><span>loader</span></div>
+      <div class="zyx1029_item"><i data-lucide="refresh-cw"></i><span>refresh-cw</span></div>
+      <div class="zyx1029_item"><i data-lucide="refresh-ccw"></i><span>refresh-ccw</span></div>
+      <div class="zyx1029_item"><i data-lucide="loader-2"></i><span>loader-2</span></div>
+    </div>
+  </section>
+
+  <section class="zyx1029_section zyx1029_section-inline">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Inline SVG</span>
+      <h2>方式二 · 直接内联 SVG <small>复制 SVG 代码即可 · 无需 JS 依赖</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item" style="animation-delay:.00s">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>home</span>
+      </div>
+      <div class="zyx1029_item" style="animation-delay:.02s">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span>heart</span>
+      </div>
+      <div class="zyx1029_item" style="animation-delay:.04s">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>star</span>
+      </div>
+      <div class="zyx1029_item" style="animation-delay:.06s">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>search</span>
+      </div>
+      <div class="zyx1029_item" style="animation-delay:.08s">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>calendar</span>
+      </div>
+      <div class="zyx1029_item" style="animation-delay:.10s">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>clock</span>
+      </div>
+    </div>
+    <div class="zyx1029_code-wrap">
+      <div class="zyx1029_code-head">
+        <span></span><span></span><span></span>
+        <span class="zyx1029_code-title">方式二 · 直接内联 SVG</span>
+      </div>
+      <pre class="zyx1029_code"><code><span class="c">&lt;!-- 直接复制 SVG 代码到页面，无需 JS --&gt;</span>
+<span class="k">&lt;svg</span> <span class="t">xmlns</span>=<span class="s">"http://www.w3.org/2000/svg"</span>
+     <span class="t">viewBox</span>=<span class="s">"0 0 24 24"</span>
+     <span class="t">fill</span>=<span class="s">"none"</span>
+     <span class="t">stroke</span>=<span class="s">"currentColor"</span>
+     <span class="t">stroke-width</span>=<span class="s">"2"</span>
+     <span class="t">stroke-linecap</span>=<span class="s">"round"</span>
+     <span class="t">stroke-linejoin</span>=<span class="s">"round"</span><span class="k">&gt;</span>
+  <span class="k">&lt;path</span> <span class="t">d</span>=<span class="s">"..."</span> <span class="k">/&gt;</span>
+<span class="k">&lt;/svg&gt;</span>
+
+<span class="c">/* 颜色由 CSS color 控制：*/</span>
+<span class="t">svg</span> { color: <span class="n">#2dd4bf</span>; }</code></pre>
+    </div>
+  </section>
+
+</main>
+
+<footer class="zyx1029_footer">
+  Lucide v0.468.0 · 本地 CDN · <b>SVG 方式</b> · JS 渲染 / 直接内联
+</footer>
+
+<script src="cdn/lucide/lucide.min.js"></script>
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS_obj_fun1028</title>
+    <link rel="stylesheet" href="JS_obj_fun1029.css">
+</head>
+<body>
+
+    <script>
+//Math
+console.log(Math.floor(1.9));//向下取整
+console.log(Math.round(1.9));//四舍五入
+console.log(Math.floor(Math.random()*101));//随机数，[0,100]整数
+//随机数[min,max]整数
+//function randomInt(min,max){
+//    return Math.floor(Math.random()*(max-min+1))+min;
+//}
+//Date对象
+var date = new Date();
+console.log(date.getFullYear());//获取年份
+console.log(date.getMonth()+1);//获取月份，0-11
+console.log(date.getDate());//获取日期
+console.log(date.getDay());//获取星期几，0-6，0表示星期天
+console.log(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());//获取时间
+console.log(date.getTime());//获取时间戳，1970年1月1日到现在的毫秒数
+//数组
+var arr = [1,2,3,4,5,6,'seven','eight','nine','ten'];
+var arr1 = new Array(1,2,3,4,5,6,'seven','eight','nine','ten');//创建一个数组，元素为1,2,3,4,5,6,'seven','eight','nine','ten'
+var arr2 = new Array(5);//创建一个长度为5的数组，元素为undefined
+console.log(arr2);
+//数组里面只有一个元素5 ES6中可以使用Array.of()方法创建一个数组，元素为5
+var arr3 = Array.of(5);
+
+    </script>
+</body>
+</html>

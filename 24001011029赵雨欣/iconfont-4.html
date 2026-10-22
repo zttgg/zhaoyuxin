@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Remix Icon · SVG 底部导航</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:-apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+    background:#081317;color:#e5e7eb;
+    -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  /* ===== 背景 ===== */
+  .zyx1029_bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+  .zyx1029_bg::before,.zyx1029_bg::after{
+    content:'';position:absolute;width:640px;height:640px;border-radius:50%;filter:blur(150px);opacity:.3;
+  }
+  .zyx1029_bg::before{background:radial-gradient(circle,#14b8a6,transparent 60%);top:-260px;left:-200px}
+  .zyx1029_bg::after{background:radial-gradient(circle,#0ea5e9,transparent 60%);bottom:-300px;right:-200px}
+
+  /* ===== 手机舞台 ===== */
+  .zyx1029_stage{
+    max-width:480px;margin:0 auto;min-height:100dvh;
+    display:flex;flex-direction:column;position:relative;
+  }
+  @media (min-width:520px){
+    .zyx1029_stage{
+      border-left:1px solid rgba(255,255,255,.07);
+      border-right:1px solid rgba(255,255,255,.07);
+      box-shadow:0 0 80px rgba(20,184,166,.12);
+    }
+  }
+
+  /* ===== 顶栏 ===== */
+  .zyx1029_topbar{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;gap:10px;
+    padding:calc(12px + env(safe-area-inset-top)) 16px 12px;
+    background:rgba(8,19,23,.78);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,.06);
+  }
+  .zyx1029_back{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:34px;height:34px;border-radius:10px;flex:none;
+    background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+    color:#cbd5e1;text-decoration:none;transition:all .22s ease;
+  }
+  .zyx1029_back svg{width:16px;height:16px}
+  .zyx1029_back:hover{background:rgba(45,212,191,.16);border-color:rgba(45,212,191,.5);color:#ccfbf1}
+  .zyx1029_topbar h1{font-size:16px;font-weight:600;letter-spacing:-.01em;margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .zyx1029_topbar .zyx1029_ver{font-size:11px;color:#64748b;flex:none;font-family:Consolas,monospace}
+
+  /* ===== 内容区 ===== */
+  .zyx1029_main{flex:1;padding:20px 16px calc(96px + env(safe-area-inset-bottom))}
+
+  .zyx1029_hero{
+    background:linear-gradient(135deg,rgba(20,184,166,.2),rgba(14,165,233,.12));
+    border:1px solid rgba(45,212,191,.28);
+    border-radius:18px;padding:22px 18px;margin-bottom:18px;
+    animation:zyx1029_up .6s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .zyx1029_hero h2{margin:0 0 6px;font-size:20px;font-weight:700;color:#f1f5f9}
+  .zyx1029_hero p{margin:0;font-size:13px;line-height:1.7;color:#7dd3fc}
+  .zyx1029_hero p b{color:#ccfbf1}
+  @keyframes zyx1029_up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  .zyx1029_card{
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;padding:18px 16px;margin-bottom:14px;
+    animation:zyx1029_up .6s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .zyx1029_card:nth-of-type(1){animation-delay:.08s}
+  .zyx1029_card:nth-of-type(2){animation-delay:.16s}
+  .zyx1029_card:nth-of-type(3){animation-delay:.24s}
+  .zyx1029_card h3{
+    margin:0 0 8px;font-size:14px;font-weight:600;color:#e2e8f0;
+    display:flex;align-items:center;gap:8px;
+  }
+  .zyx1029_card h3 .zyx1029_chip{
+    font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    padding:2px 8px;border-radius:5px;flex:none;
+  }
+  .zyx1029_chip-num{background:rgba(244,63,94,.16);color:#fb7185;border:1px solid rgba(244,63,94,.3)}
+  .zyx1029_chip-dot{background:rgba(245,158,11,.16);color:#fbbf24;border:1px solid rgba(245,158,11,.3)}
+  .zyx1029_chip-svg{background:rgba(45,212,191,.16);color:#5eead4;border:1px solid rgba(45,212,191,.3)}
+  .zyx1029_card p{margin:0;font-size:12.5px;line-height:1.75;color:#94a3b8}
+  .zyx1029_card code{
+    font-family:Consolas,monospace;font-size:11px;color:#5eead4;
+    background:rgba(20,184,166,.12);padding:1px 5px;border-radius:4px;
+  }
+
+  .zyx1029_demo-btns{display:flex;gap:10px;margin-top:12px}
+  .zyx1029_demo-btn{
+    flex:1;padding:9px 0;border-radius:10px;border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.05);color:#cbd5e1;font-size:12.5px;font-weight:500;
+    cursor:pointer;transition:all .22s ease;font-family:inherit;
+  }
+  .zyx1029_demo-btn:hover{border-color:rgba(45,212,191,.5);background:rgba(20,184,166,.14);color:#ccfbf1}
+  .zyx1029_demo-btn:active{transform:scale(.97)}
+
+  /* ===== 底部导航 ===== */
+  .zyx1029_tabbar{
+    position:fixed;bottom:0;left:0;right:0;z-index:100;
+    background:rgba(10,20,26,.86);
+    backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-top:1px solid rgba(255,255,255,.08);
+    padding:6px 0 calc(6px + env(safe-area-inset-bottom));
+  }
+  @media (min-width:520px){
+    .zyx1029_tabbar{width:100%;max-width:480px;margin:0 auto;left:50%;transform:translateX(-50%)}
+  }
+  .zyx1029_tabs{display:flex;max-width:480px;margin:0 auto}
+  .zyx1029_tab{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:5px 0 3px;border:0;background:none;cursor:pointer;
+    color:#64748b;font-family:inherit;transition:color .25s ease,transform .25s ease;
+  }
+  .zyx1029_tab:active{transform:scale(.94)}
+  .zyx1029_tab-icon{position:relative;width:26px;height:26px;transition:transform .28s cubic-bezier(.2,.8,.2,1)}
+  .zyx1029_tab-icon svg{width:24px;height:24px;display:block;margin-top:1px;fill:currentColor}
+  .zyx1029_tab-label{font-size:10.5px;font-weight:500;letter-spacing:.02em}
+  .zyx1029_tab.zyx1029_active{color:#5eead4}
+  .zyx1029_tab.zyx1029_active .zyx1029_tab-icon{transform:translateY(-2px) scale(1.08);filter:drop-shadow(0 0 8px rgba(45,212,191,.65))}
+  .zyx1029_tab.zyx1029_active .zyx1029_tab-label{font-weight:600}
+  .zyx1029_tab.zyx1029_active::after{
+    content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+    width:20px;height:3px;border-radius:0 0 4px 4px;
+    background:linear-gradient(90deg,#2dd4bf,#38bdf8);
+  }
+
+  /* ===== 数字徽章 ===== */
+  .zyx1029_badge{
+    position:absolute;top:-7px;right:-15px;
+    min-width:17px;height:17px;padding:0 4px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#f43f5e,#fb7185);
+    color:#fff;font-size:9.5px;font-weight:700;
+    font-family:Consolas,monospace;line-height:1;
+    box-shadow:0 0 0 2.5px rgba(10,20,26,.92),0 2px 6px rgba(244,63,94,.45);
+    animation:zyx1029_pop .35s cubic-bezier(.2,1.4,.4,1) both;
+  }
+  /* ===== 红点 ===== */
+  .zyx1029_dot{
+    position:absolute;top:-2px;right:-9px;
+    width:8px;height:8px;border-radius:50%;
+    background:linear-gradient(135deg,#f43f5e,#fb7185);
+    box-shadow:0 0 0 2.5px rgba(10,20,26,.92),0 0 8px rgba(244,63,94,.6);
+    animation:zyx1029_pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes zyx1029_pop{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+  @keyframes zyx1029_pulse{
+    0%,100%{transform:scale(1);opacity:1}
+    50%{transform:scale(1.25);opacity:.75}
+  }
+
+  .zyx1029_footnote{
+    text-align:center;font-size:11px;color:#475569;padding:8px 0 18px;letter-spacing:.04em;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SVG Symbol 精灵图（提取自 font/remixicon.symbol.svg，完整版共 3000+ 图标） ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol viewBox="0 0 24 24" id="zyx1029_ri-home-5-fill"><path d="M21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20ZM11 13V19H13V13H11Z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="zyx1029_ri-home-5-line"><path d="M13 19H19V9.97815L12 4.53371L5 9.97815V19H11V13H13V19ZM21 20C21 20.5523 20.5523 21 20 21H4C3.44772 21 3 20.5523 3 20V9.48907C3 9.18048 3.14247 8.88917 3.38606 8.69972L11.3861 2.47749C11.7472 2.19663 12.2528 2.19663 12.6139 2.47749L20.6139 8.69972C20.8575 8.88917 21 9.18048 21 9.48907V20Z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="zyx1029_ri-compass-3-fill"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM16.5 7.5L10 10L7.5 16.5L14 14L16.5 7.5ZM12 13C11.4477 13 11 12.5523 11 12C11 11.4477 11.4477 11 12 11C12.5523 11 13 11.4477 13 12C13 12.5523 12.5523 13 12 13Z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="zyx1029_ri-compass-3-line"><path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM16.5 7.5L14 14L7.5 16.5L10 10L16.5 7.5ZM12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="zyx1029_ri-message-3-fill"><path d="M2 8.99374C2 5.68349 4.67654 3 8.00066 3H15.9993C19.3134 3 22 5.69478 22 8.99374V21H8.00066C4.68659 21 2 18.3052 2 15.0063V8.99374ZM14 11V13H16V11H14ZM8 11V13H10V11H8Z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="zyx1029_ri-message-3-line"><path d="M2 8.99374C2 5.68349 4.67654 3 8.00066 3H15.9993C19.3134 3 22 5.69478 22 8.99374V21H8.00066C4.68659 21 2 18.3052 2 15.0063V8.99374ZM20 19V8.99374C20 6.79539 18.2049 5 15.9993 5H8.00066C5.78458 5 4 6.78458 4 8.99374V15.0063C4 17.2046 5.79512 19 8.00066 19H20ZM14 11H16V13H14V11ZM8 11H10V13H8V11Z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="zyx1029_ri-user-3-fill"><path d="M20 22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13Z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="zyx1029_ri-user-3-line"><path d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"></path></symbol>
+    <symbol viewBox="0 0 24 24" id="zyx1029_ri-arrow-left-line"><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></symbol>
+  </defs>
+</svg>
+
+<div class="zyx1029_bg"></div>
+
+<div class="zyx1029_stage">
+
+  <header class="zyx1029_topbar">
+    <a class="zyx1029_back" href="index.html" title="返回首页"><svg><use href="#zyx1029_ri-arrow-left-line"></use></svg></a>
+    <h1>SVG 图标 · 底部导航</h1>
+    <span class="zyx1029_ver">RemixIcon 4.5.0</span>
+  </header>
+
+  <main class="zyx1029_main">
+
+    <section class="zyx1029_hero">
+      <h2>移动端 TabBar</h2>
+      <p>4 个导航项 · <b>flex: 1 等分自适应宽度</b> · 固定于底部 · 使用 Remix Icon <b>SVG Symbol + &lt;use&gt;</b> 矢量方式</p>
+    </section>
+
+    <section class="zyx1029_card">
+      <h3><span class="zyx1029_chip zyx1029_chip-num">Badge</span>数字徽章</h3>
+      <p>消息 Tab 右上角的数字徽章，超过 99 显示 <code>99+</code>。点击下方按钮可实时增减：</p>
+      <div class="zyx1029_demo-btns">
+        <button class="zyx1029_demo-btn" id="zyx1029_btnAdd" type="button">+1 新消息</button>
+        <button class="zyx1029_demo-btn" id="zyx1029_btnClear" type="button">清空未读</button>
+      </div>
+    </section>
+
+    <section class="zyx1029_card">
+      <h3><span class="zyx1029_chip zyx1029_chip-dot">Dot</span>红点提醒</h3>
+      <p>发现 Tab 右上角的 8px 红点，带呼吸脉冲动画，用于弱提醒（无需数字）。</p>
+    </section>
+
+    <section class="zyx1029_card">
+      <h3><span class="zyx1029_chip zyx1029_chip-svg">SVG</span>矢量图标方式</h3>
+      <p>通过 <code>&lt;svg&gt;&lt;use href="#zyx1029_ri-home-5-line"&gt;</code> 引用 symbol 精灵图，选中态切换为 Fill 版本，<code>fill: currentColor</code> 跟随文字颜色。</p>
+    </section>
+
+    <p class="zyx1029_footnote">font/remixicon.symbol.svg · 矢量缩放无损</p>
+
+  </main>
+
+  <!-- 底部导航：固定 · 4 项 · flex 等分自适应 -->
+  <nav class="zyx1029_tabbar" id="zyx1029_tabbar">
+    <div class="zyx1029_tabs">
+
+      <button class="zyx1029_tab zyx1029_active" type="button" data-zyx1029-icon="home-5">
+        <span class="zyx1029_tab-icon"><svg><use href="#zyx1029_ri-home-5-fill"></use></svg></span>
+        <span class="zyx1029_tab-label">首页</span>
+      </button>
+
+      <button class="zyx1029_tab" type="button" data-zyx1029-icon="compass-3">
+        <span class="zyx1029_tab-icon"><svg><use href="#zyx1029_ri-compass-3-line"></use></svg><span class="zyx1029_dot"></span></span>
+        <span class="zyx1029_tab-label">发现</span>
+      </button>
+
+      <button class="zyx1029_tab" type="button" data-zyx1029-icon="message-3">
+        <span class="zyx1029_tab-icon"><svg><use href="#zyx1029_ri-message-3-line"></use></svg><span class="zyx1029_badge" id="zyx1029_badge">99+</span></span>
+        <span class="zyx1029_tab-label">消息</span>
+      </button>
+
+      <button class="zyx1029_tab" type="button" data-zyx1029-icon="user-3">
+        <span class="zyx1029_tab-icon"><svg><use href="#zyx1029_ri-user-3-line"></use></svg></span>
+        <span class="zyx1029_tab-label">我的</span>
+      </button>
+
+    </div>
+  </nav>
+
+</div>
+
+<script>
+  // ===== Tab 切换：切换 <use> 指向 line ↔ fill symbol =====
+  var zyx1029_tabs = document.querySelectorAll('.zyx1029_tab');
+  zyx1029_tabs.forEach(function (zyx1029_tab) {
+    zyx1029_tab.addEventListener('click', function () {
+      zyx1029_tabs.forEach(function (zyx1029_t) {
+        zyx1029_t.classList.remove('zyx1029_active');
+        var zyx1029_use = zyx1029_t.querySelector('.zyx1029_tab-icon use');
+        var zyx1029_name = zyx1029_t.getAttribute('data-zyx1029-icon');
+        zyx1029_use.setAttribute('href', '#zyx1029_ri-' + zyx1029_name + '-line');
+      });
+      this.classList.add('zyx1029_active');
+      this.querySelector('.zyx1029_tab-icon use').setAttribute(
+        'href', '#zyx1029_ri-' + this.getAttribute('data-zyx1029-icon') + '-fill');
+    });
+  });
+
+  // ===== 数字徽章演示 =====
+  var zyx1029_badgeEl = document.getElementById('zyx1029_badge');
+  var zyx1029_count = 99; // 初始 99+
+  function zyx1029_renderBadge() {
+    if (zyx1029_count <= 0) {
+      zyx1029_badgeEl.style.display = 'none';
+    } else {
+      zyx1029_badgeEl.style.display = 'flex';
+      zyx1029_badgeEl.textContent = zyx1029_count > 99 ? '99+' : String(zyx1029_count);
+      zyx1029_badgeEl.style.animation = 'none';
+      void zyx1029_badgeEl.offsetWidth; /* 重启入场动画 */
+      zyx1029_badgeEl.style.animation = '';
+    }
+  }
+  document.getElementById('zyx1029_btnAdd').addEventListener('click', function () {
+    zyx1029_count = zyx1029_count <= 0 ? 1 : Math.min(zyx1029_count + 1, 999);
+    zyx1029_renderBadge();
+  });
+  document.getElementById('zyx1029_btnClear').addEventListener('click', function () {
+    zyx1029_count = 0;
+    zyx1029_renderBadge();
+  });
+</script>
+</body>
+</html>

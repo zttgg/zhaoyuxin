@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Font Awesome · 字体图标画廊</title>
+<link rel="stylesheet" href="cdn/fontawesome/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:'Inter','Microsoft YaHei',system-ui,sans-serif;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+    background:#0b0f1a;
+    color:#e5e7eb;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ========== 背景装饰 ========== */
+  .zyx1029_bg{
+    position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;
+  }
+  .zyx1029_bg::before,
+  .zyx1029_bg::after{
+    content:'';position:absolute;width:720px;height:720px;border-radius:50%;filter:blur(140px);opacity:.35;
+  }
+  .zyx1029_bg::before{
+    background:radial-gradient(circle,#6366f1 0%,transparent 60%);
+    top:-280px;left:-180px;
+  }
+  .zyx1029_bg::after{
+    background:radial-gradient(circle,#a855f7 0%,transparent 60%);
+    bottom:-280px;right:-180px;
+  }
+  .zyx1029_bg-grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+    background-size:56px 56px;
+    mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);
+  }
+
+  /* ========== Header ========== */
+  .zyx1029_header{
+    padding:72px 24px 40px;text-align:center;position:relative;
+  }
+  .zyx1029_header::after{
+    content:'';position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+    width:120px;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);
+  }
+  .zyx1029_header h1{
+    font-size:clamp(28px,5vw,42px);font-weight:700;letter-spacing:-.02em;margin:0 0 12px;
+    background:linear-gradient(135deg,#e0e7ff 0%,#a5b4fc 40%,#c4b5fd 75%,#f0abfc 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .zyx1029_header h1 i{
+    background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .zyx1029_subtitle{
+    font-size:14px;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;font-weight:500;margin-bottom:18px;
+  }
+  .zyx1029_meta{
+    font-size:13px;color:#64748b;margin-bottom:22px;
+  }
+  .zyx1029_meta b{color:#cbd5e1;font-weight:500}
+  .zyx1029_back{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:10px 22px;border-radius:999px;
+    background:rgba(255,255,255,.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.1);
+    color:#cbd5e1;text-decoration:none;font-size:13px;font-weight:500;
+    transition:all .25s ease;
+  }
+  .zyx1029_back:hover{
+    background:rgba(129,140,248,.15);border-color:rgba(129,140,248,.4);
+    color:#e0e7ff;transform:translateY(-1px);
+    box-shadow:0 6px 20px -6px rgba(99,102,241,.45);
+  }
+
+  /* ========== Container ========== */
+  .zyx1029_container{
+    flex:1;padding:48px 24px 64px;max-width:1280px;margin:0 auto;width:100%;
+  }
+
+  /* ========== Section ========== */
+  .zyx1029_section{
+    margin-bottom:56px;
+    animation:zyx1029_fadeUp .7s ease both;
+  }
+  @keyframes zyx1029_fadeUp{
+    from{opacity:0;transform:translateY(24px)}
+    to{opacity:1;transform:none}
+  }
+  .zyx1029_section-head{
+    display:flex;align-items:center;gap:14px;margin-bottom:24px;
+  }
+  .zyx1029_section-tag{
+    display:inline-block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    padding:4px 10px;border-radius:6px;
+  }
+  .zyx1029_section h2{
+    font-size:18px;font-weight:600;color:#f1f5f9;letter-spacing:-.01em;margin:0;
+  }
+  .zyx1029_section h2 small{
+    display:block;font-size:12px;font-weight:400;color:#64748b;letter-spacing:.02em;margin-top:3px;
+  }
+
+  /* section color variants */
+  .zyx1029_section-solid .zyx1029_section-tag{background:rgba(244,63,94,.15);color:#fb7185;border:1px solid rgba(244,63,94,.25)}
+  .zyx1029_section-regular .zyx1029_section-tag{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.25)}
+  .zyx1029_section-brands .zyx1029_section-tag{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.25)}
+  .zyx1029_section-spin .zyx1029_section-tag{background:rgba(168,85,247,.15);color:#c084fc;border:1px solid rgba(168,85,247,.25)}
+
+  /* ========== Grid ========== */
+  .zyx1029_grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(118px,1fr));
+    gap:12px;
+  }
+
+  /* ========== Item Card (glass) ========== */
+  .zyx1029_item{
+    position:relative;
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    padding:22px 8px 14px;
+    text-align:center;
+    cursor:default;
+    overflow:hidden;
+    transition:transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s ease, border-color .28s ease, background .28s ease;
+  }
+  .zyx1029_item::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+    opacity:0;transition:opacity .28s ease;
+  }
+  .zyx1029_item:hover{
+    transform:translateY(-4px);
+    background:rgba(255,255,255,.06);
+    border-color:rgba(255,255,255,.18);
+    box-shadow:0 14px 40px -12px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.04) inset;
+  }
+  .zyx1029_item:hover::before{opacity:1}
+
+  /* icon */
+  .zyx1029_item i{
+    display:block;font-size:30px;margin-bottom:12px;position:relative;
+    transition:transform .3s cubic-bezier(.2,.8,.2,1), filter .3s ease;
+  }
+  .zyx1029_item:hover i{
+    transform:scale(1.1);
+  }
+  .zyx1029_section-solid    .zyx1029_item i{color:#f472b6}
+  .zyx1029_section-regular  .zyx1029_item i{color:#6ee7b7}
+  .zyx1029_section-brands   .zyx1029_item i{color:#93c5fd}
+  .zyx1029_section-spin     .zyx1029_item i{color:#d8b4fe;animation:zyx1029_spin 2s linear infinite}
+
+  /* hover glow per section */
+  .zyx1029_section-solid   .zyx1029_item:hover i{filter:drop-shadow(0 0 10px rgba(244,114,182,.6))}
+  .zyx1029_section-regular .zyx1029_item:hover i{filter:drop-shadow(0 0 10px rgba(110,231,183,.55))}
+  .zyx1029_section-brands  .zyx1029_item:hover i{filter:drop-shadow(0 0 10px rgba(147,197,253,.6))}
+  .zyx1029_section-spin    .zyx1029_item:hover i{filter:drop-shadow(0 0 14px rgba(216,180,254,.7))}
+
+  @keyframes zyx1029_spin{to{transform:rotate(360deg)}}
+
+  /* caption */
+  .zyx1029_item span{
+    font-family:'JetBrains Mono',Consolas,monospace;
+    font-size:10px;color:#64748b;letter-spacing:.02em;line-height:1.4;
+    display:block;
+    transition:color .2s ease;
+  }
+  .zyx1029_item:hover span{color:#cbd5e1}
+
+  /* ========== Footer ========== */
+  .zyx1029_footer{
+    padding:32px 24px;text-align:center;
+    border-top:1px solid rgba(255,255,255,.06);
+    background:rgba(8,11,22,.6);backdrop-filter:blur(12px);
+    font-size:12px;color:#475569;letter-spacing:.04em;
+  }
+  .zyx1029_footer b{color:#64748b;font-weight:500}
+
+  /* ========== Reveal ========== */
+  .zyx1029_item{animation:zyx1029_itemIn .5s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes zyx1029_itemIn{
+    from{opacity:0;transform:translateY(12px) scale(.96)}
+    to{opacity:1;transform:none}
+  }
+
+  @media (max-width:640px){
+    .zyx1029_grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px}
+    .zyx1029_item{padding:18px 6px 10px;border-radius:12px}
+    .zyx1029_item i{font-size:26px;margin-bottom:8px}
+  }
+</style>
+</head>
+<body>
+
+<div class="zyx1029_bg"><div class="zyx1029_bg-grid"></div></div>
+
+<header class="zyx1029_header">
+  <h1><i class="fa-solid fa-icons"></i> Font Awesome 图标画廊</h1>
+  <p class="zyx1029_subtitle">icon gallery · v6.5.2 · font-class mode</p>
+  <p class="zyx1029_meta">使用 CSS 类名调用 · 本地 CDN · 支持 <b>Solid / Regular / Brands</b> 三套风格</p>
+  <a class="zyx1029_back" href="index.html"><i class="fa-solid fa-arrow-left" style="margin-right:4px;font-size:12px"></i>返回首页</a>
+</header>
+
+<main class="zyx1029_container">
+
+  <section class="zyx1029_section zyx1029_section-solid">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Solid</span>
+      <h2>实心图标 <small>fa-solid · 最常用的一套，覆盖绝大多数场景</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item" style="animation-delay:.00s"><i class="fa-solid fa-home"></i><span>fa-home</span></div>
+      <div class="zyx1029_item" style="animation-delay:.02s"><i class="fa-solid fa-user"></i><span>fa-user</span></div>
+      <div class="zyx1029_item" style="animation-delay:.04s"><i class="fa-solid fa-envelope"></i><span>fa-envelope</span></div>
+      <div class="zyx1029_item" style="animation-delay:.06s"><i class="fa-solid fa-phone"></i><span>fa-phone</span></div>
+      <div class="zyx1029_item" style="animation-delay:.08s"><i class="fa-solid fa-search"></i><span>fa-search</span></div>
+      <div class="zyx1029_item" style="animation-delay:.10s"><i class="fa-solid fa-cog"></i><span>fa-cog</span></div>
+      <div class="zyx1029_item" style="animation-delay:.12s"><i class="fa-solid fa-heart"></i><span>fa-heart</span></div>
+      <div class="zyx1029_item" style="animation-delay:.14s"><i class="fa-solid fa-star"></i><span>fa-star</span></div>
+      <div class="zyx1029_item" style="animation-delay:.16s"><i class="fa-solid fa-bookmark"></i><span>fa-bookmark</span></div>
+      <div class="zyx1029_item" style="animation-delay:.18s"><i class="fa-solid fa-calendar"></i><span>fa-calendar</span></div>
+      <div class="zyx1029_item" style="animation-delay:.20s"><i class="fa-solid fa-clock"></i><span>fa-clock</span></div>
+      <div class="zyx1029_item" style="animation-delay:.22s"><i class="fa-solid fa-camera"></i><span>fa-camera</span></div>
+      <div class="zyx1029_item" style="animation-delay:.24s"><i class="fa-solid fa-image"></i><span>fa-image</span></div>
+      <div class="zyx1029_item" style="animation-delay:.26s"><i class="fa-solid fa-music"></i><span>fa-music</span></div>
+      <div class="zyx1029_item" style="animation-delay:.28s"><i class="fa-solid fa-film"></i><span>fa-film</span></div>
+      <div class="zyx1029_item" style="animation-delay:.30s"><i class="fa-solid fa-file"></i><span>fa-file</span></div>
+      <div class="zyx1029_item" style="animation-delay:.32s"><i class="fa-solid fa-folder"></i><span>fa-folder</span></div>
+      <div class="zyx1029_item" style="animation-delay:.34s"><i class="fa-solid fa-download"></i><span>fa-download</span></div>
+      <div class="zyx1029_item" style="animation-delay:.36s"><i class="fa-solid fa-upload"></i><span>fa-upload</span></div>
+      <div class="zyx1029_item" style="animation-delay:.38s"><i class="fa-solid fa-trash"></i><span>fa-trash</span></div>
+      <div class="zyx1029_item" style="animation-delay:.40s"><i class="fa-solid fa-pen"></i><span>fa-pen</span></div>
+      <div class="zyx1029_item" style="animation-delay:.42s"><i class="fa-solid fa-plus"></i><span>fa-plus</span></div>
+      <div class="zyx1029_item" style="animation-delay:.44s"><i class="fa-solid fa-minus"></i><span>fa-minus</span></div>
+      <div class="zyx1029_item" style="animation-delay:.46s"><i class="fa-solid fa-check"></i><span>fa-check</span></div>
+      <div class="zyx1029_item" style="animation-delay:.48s"><i class="fa-solid fa-xmark"></i><span>fa-xmark</span></div>
+      <div class="zyx1029_item" style="animation-delay:.50s"><i class="fa-solid fa-arrow-right"></i><span>fa-arrow-right</span></div>
+      <div class="zyx1029_item" style="animation-delay:.52s"><i class="fa-solid fa-arrow-left"></i><span>fa-arrow-left</span></div>
+      <div class="zyx1029_item" style="animation-delay:.54s"><i class="fa-solid fa-bell"></i><span>fa-bell</span></div>
+      <div class="zyx1029_item" style="animation-delay:.56s"><i class="fa-solid fa-lock"></i><span>fa-lock</span></div>
+      <div class="zyx1029_item" style="animation-delay:.58s"><i class="fa-solid fa-globe"></i><span>fa-globe</span></div>
+      <div class="zyx1029_item" style="animation-delay:.60s"><i class="fa-solid fa-map-location-dot"></i><span>fa-map-location-dot</span></div>
+      <div class="zyx1029_item" style="animation-delay:.62s"><i class="fa-solid fa-wallet"></i><span>fa-wallet</span></div>
+      <div class="zyx1029_item" style="animation-delay:.64s"><i class="fa-solid fa-cart-shopping"></i><span>fa-cart-shopping</span></div>
+      <div class="zyx1029_item" style="animation-delay:.66s"><i class="fa-solid fa-credit-card"></i><span>fa-credit-card</span></div>
+      <div class="zyx1029_item" style="animation-delay:.68s"><i class="fa-solid fa-chart-pie"></i><span>fa-chart-pie</span></div>
+      <div class="zyx1029_item" style="animation-delay:.70s"><i class="fa-solid fa-chart-line"></i><span>fa-chart-line</span></div>
+      <div class="zyx1029_item" style="animation-delay:.72s"><i class="fa-solid fa-trending-up"></i><span>fa-trending-up</span></div>
+      <div class="zyx1029_item" style="animation-delay:.74s"><i class="fa-solid fa-tv"></i><span>fa-tv</span></div>
+      <div class="zyx1029_item" style="animation-delay:.76s"><i class="fa-solid fa-laptop"></i><span>fa-laptop</span></div>
+      <div class="zyx1029_item" style="animation-delay:.78s"><i class="fa-solid fa-mobile-screen"></i><span>fa-mobile-screen</span></div>
+    </div>
+  </section>
+
+  <section class="zyx1029_section zyx1029_section-regular">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Regular</span>
+      <h2>常规图标 <small>fa-regular · 线条风，适合低强调场景</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item" style="animation-delay:.00s"><i class="fa-regular fa-user"></i><span>fa-user</span></div>
+      <div class="zyx1029_item" style="animation-delay:.02s"><i class="fa-regular fa-envelope"></i><span>fa-envelope</span></div>
+      <div class="zyx1029_item" style="animation-delay:.04s"><i class="fa-regular fa-heart"></i><span>fa-heart</span></div>
+      <div class="zyx1029_item" style="animation-delay:.06s"><i class="fa-regular fa-star"></i><span>fa-star</span></div>
+      <div class="zyx1029_item" style="animation-delay:.08s"><i class="fa-regular fa-bookmark"></i><span>fa-bookmark</span></div>
+      <div class="zyx1029_item" style="animation-delay:.10s"><i class="fa-regular fa-calendar"></i><span>fa-calendar</span></div>
+      <div class="zyx1029_item" style="animation-delay:.12s"><i class="fa-regular fa-clock"></i><span>fa-clock</span></div>
+      <div class="zyx1029_item" style="animation-delay:.14s"><i class="fa-regular fa-image"></i><span>fa-image</span></div>
+      <div class="zyx1029_item" style="animation-delay:.16s"><i class="fa-regular fa-file"></i><span>fa-file</span></div>
+      <div class="zyx1029_item" style="animation-delay:.18s"><i class="fa-regular fa-file-lines"></i><span>fa-file-lines</span></div>
+      <div class="zyx1029_item" style="animation-delay:.20s"><i class="fa-regular fa-folder"></i><span>fa-folder</span></div>
+      <div class="zyx1029_item" style="animation-delay:.22s"><i class="fa-regular fa-trash-can"></i><span>fa-trash-can</span></div>
+      <div class="zyx1029_item" style="animation-delay:.24s"><i class="fa-regular fa-bell"></i><span>fa-bell</span></div>
+      <div class="zyx1029_item" style="animation-delay:.26s"><i class="fa-regular fa-circle-check"></i><span>fa-circle-check</span></div>
+      <div class="zyx1029_item" style="animation-delay:.28s"><i class="fa-regular fa-circle-xmark"></i><span>fa-circle-xmark</span></div>
+      <div class="zyx1029_item" style="animation-delay:.30s"><i class="fa-regular fa-comment"></i><span>fa-comment</span></div>
+      <div class="zyx1029_item" style="animation-delay:.32s"><i class="fa-regular fa-copy"></i><span>fa-copy</span></div>
+      <div class="zyx1029_item" style="animation-delay:.34s"><i class="fa-regular fa-keyboard"></i><span>fa-keyboard</span></div>
+      <div class="zyx1029_item" style="animation-delay:.36s"><i class="fa-regular fa-lightbulb"></i><span>fa-lightbulb</span></div>
+      <div class="zyx1029_item" style="animation-delay:.38s"><i class="fa-regular fa-paper-plane"></i><span>fa-paper-plane</span></div>
+    </div>
+  </section>
+
+  <section class="zyx1029_section zyx1029_section-brands">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Brands</span>
+      <h2>品牌图标 <small>fa-brands · 常见社交与科技平台 Logo</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item" style="animation-delay:.00s"><i class="fa-brands fa-github"></i><span>fa-github</span></div>
+      <div class="zyx1029_item" style="animation-delay:.02s"><i class="fa-brands fa-twitter"></i><span>fa-twitter</span></div>
+      <div class="zyx1029_item" style="animation-delay:.04s"><i class="fa-brands fa-facebook"></i><span>fa-facebook</span></div>
+      <div class="zyx1029_item" style="animation-delay:.06s"><i class="fa-brands fa-instagram"></i><span>fa-instagram</span></div>
+      <div class="zyx1029_item" style="animation-delay:.08s"><i class="fa-brands fa-linkedin"></i><span>fa-linkedin</span></div>
+      <div class="zyx1029_item" style="animation-delay:.10s"><i class="fa-brands fa-weixin"></i><span>fa-weixin</span></div>
+      <div class="zyx1029_item" style="animation-delay:.12s"><i class="fa-brands fa-weibo"></i><span>fa-weibo</span></div>
+      <div class="zyx1029_item" style="animation-delay:.14s"><i class="fa-brands fa-qq"></i><span>fa-qq</span></div>
+      <div class="zyx1029_item" style="animation-delay:.16s"><i class="fa-brands fa-bilibili"></i><span>fa-bilibili</span></div>
+      <div class="zyx1029_item" style="animation-delay:.18s"><i class="fa-brands fa-youtube"></i><span>fa-youtube</span></div>
+      <div class="zyx1029_item" style="animation-delay:.20s"><i class="fa-brands fa-tiktok"></i><span>fa-tiktok</span></div>
+      <div class="zyx1029_item" style="animation-delay:.22s"><i class="fa-brands fa-discord"></i><span>fa-discord</span></div>
+      <div class="zyx1029_item" style="animation-delay:.24s"><i class="fa-brands fa-telegram"></i><span>fa-telegram</span></div>
+      <div class="zyx1029_item" style="animation-delay:.26s"><i class="fa-brands fa-whatsapp"></i><span>fa-whatsapp</span></div>
+      <div class="zyx1029_item" style="animation-delay:.28s"><i class="fa-brands fa-amazon"></i><span>fa-amazon</span></div>
+      <div class="zyx1029_item" style="animation-delay:.30s"><i class="fa-brands fa-google"></i><span>fa-google</span></div>
+      <div class="zyx1029_item" style="animation-delay:.32s"><i class="fa-brands fa-apple"></i><span>fa-apple</span></div>
+      <div class="zyx1029_item" style="animation-delay:.34s"><i class="fa-brands fa-windows"></i><span>fa-windows</span></div>
+      <div class="zyx1029_item" style="animation-delay:.36s"><i class="fa-brands fa-android"></i><span>fa-android</span></div>
+      <div class="zyx1029_item" style="animation-delay:.38s"><i class="fa-brands fa-linux"></i><span>fa-linux</span></div>
+    </div>
+  </section>
+
+  <section class="zyx1029_section zyx1029_section-spin">
+    <div class="zyx1029_section-head">
+      <span class="zyx1029_section-tag">Animate</span>
+      <h2>动画效果 <small>fa-spin / fa-pulse · 内置旋转与脉冲</small></h2>
+    </div>
+    <div class="zyx1029_grid">
+      <div class="zyx1029_item"><i class="fa-solid fa-spinner fa-spin"></i><span>fa-spinner</span></div>
+      <div class="zyx1029_item"><i class="fa-solid fa-circle-notch fa-spin"></i><span>fa-circle-notch</span></div>
+      <div class="zyx1029_item"><i class="fa-solid fa-sync fa-spin"></i><span>fa-sync</span></div>
+      <div class="zyx1029_item"><i class="fa-solid fa-cog fa-spin"></i><span>fa-cog</span></div>
+      <div class="zyx1029_item"><i class="fa-solid fa-compact-disc fa-spin"></i><span>fa-compact-disc</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="zyx1029_footer">
+  Font Awesome v6.5.2 · 本地 CDN · <b>字体图标方式</b> · 由 class 自动生成
+</footer>
+
+</body>
+</html>

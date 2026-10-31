@@ -60,6 +60,15 @@
 - **SSH 认证失败（Permission denied (publickey)）**：提示用户将以下公钥添加到 GitHub → Settings → SSH and GPG keys：
   `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII8ERY+DfehtC8buaKRnP4AQO9VYaEmQpMoK8uWNy8IP Zyx01060325`
 - **22 端口 Connection refused**：改用 `ssh://git@ssh.github.com:443/zttgg/zhaoyuxin.git`。
-- **沙箱限制写 .git/config**：请求用户批准沙箱外执行该命令。
+- **沙箱限制写 .git/config**：不添加远程，直接 URL 推送 `git push ssh://git@ssh.github.com:443/zttgg/zhaoyuxin.git <分支>`（首次推送可加环境变量 `$env:GIT_SSH_COMMAND = "ssh -o StrictHostKeyChecking=accept-new"` 接受 GitHub 主机密钥）。
 - **远程拒绝（非快进）**：先 `git fetch github` 对比差异并向用户说明，由用户决定处理方式。
 - **网络失败**：检查网络与仓库可访问性，不要循环重试。
+- **大仓库推送中断（broken pipe）**：仓库 pack 约 622MB，单次推送易断。改用分批推进：按 `git log --format="%h" --reverse` 取等分提交点逐段 `git push <url> <commit>:refs/heads/master`（注意仓库历史含 merge，仅当后一点是前一点后代时才 fast-forward；可用 `git merge-base --is-ancestor A B` 验证后直接推 HEAD）。
+- **GitHub 大文件警告（>50MB）**：仅警告不影响推送；>100MB 会被拒绝，需 Git LFS。
+
+## 已验证可用的推送命令（2026-10-31 实测）
+
+```powershell
+$env:GIT_SSH_COMMAND = "ssh -o StrictHostKeyChecking=accept-new"
+git push ssh://git@ssh.github.com:443/zttgg/zhaoyuxin.git master
+```

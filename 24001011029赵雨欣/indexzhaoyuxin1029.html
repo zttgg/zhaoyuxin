@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<!--
+  文件名称：indexzhaoyuxin1029.html
+  作者：赵雨欣
+  建立时间：2026-11-02 14:30:34
+  使用模型：DeepSeek-V4-Pro
+  功能名称及简介：影视排行榜 Tab 选项卡页面 —— 一比一还原「5」文件夹课堂案例，
+                  含"每日 / 每周 / 每月 / 全部"四个选项卡（每日为默认选中），
+                  每个面板为 Top10 影视剧排行榜，左右两列（左 1-5 名、右 6-10 名），
+                  前三名序号为红色徽章、第 4-10 名灰色徽章，选中选项卡为深灰底白字。
+                  JS 逻辑外部引用 js/zhaoyuxin1029_tab.js（可复用选项卡组件）：
+                  点击事件监听 → 先清除所有选项卡的选中状态 → 再设置当前元素的选中状态。
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>影视排行榜 - 赵雨欣 24001011029</title>
+  <style>
+    /* ===== 页面基础样式 ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      background: #e9eaec;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 16px;
+    }
+    .zhaoyuxin1029_back_home {
+      color: #3478f6;
+      text-decoration: none;
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+    .zhaoyuxin1029_back_home:hover { text-decoration: underline; }
+
+    /* ===== 排行榜整体容器 ===== */
+    .zhaoyuxin1029_rank_box {
+      width: 100%;
+      max-width: 560px;
+      background: #ffffff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ===== 选项卡按钮行：未选中浅灰底深灰字，选中深灰底白字；下方红色分隔线 ===== */
+    .zhaoyuxin1029_tabs {
+      display: flex;
+      background: #d4d6da;
+      border-bottom: 2px solid #e60012;
+    }
+    .zhaoyuxin1029_tab_btn {
+      flex: 1;
+      padding: 12px 0;
+      border: none;
+      background: transparent;
+      color: #4d4d4d;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+    .zhaoyuxin1029_tab_btn:hover { color: #000; }
+    /* 选中状态：深灰底、白字 */
+    .zhaoyuxin1029_tab_btn.zhaoyuxin1029_active {
+      background: #555a61;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    /* ===== 内容面板：默认隐藏，选中时显示 ===== */
+    .zhaoyuxin1029_tab_panel { display: none; padding: 14px 18px; }
+    .zhaoyuxin1029_tab_panel.zhaoyuxin1029_active {
+      display: block;
+      animation: zhaoyuxin1029_fadein .3s ease;
+    }
+    @keyframes zhaoyuxin1029_fadein {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== 排行榜列表：左右两列，左列 1-5 名、右列 6-10 名 ===== */
+    .zhaoyuxin1029_rank_list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(5, auto);
+      grid-auto-flow: column;
+      column-gap: 24px;
+    }
+    .zhaoyuxin1029_rank_list li {
+      padding: 7px 2px;
+      border-bottom: 1px solid #eeeeee;
+      color: #333333;
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .zhaoyuxin1029_rank_list li:last-child { border-bottom: none; }
+
+    /* 排名数字徽章：默认灰色，前三名红色 */
+    .zhaoyuxin1029_rank_list li em {
+      font-style: normal;
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      line-height: 18px;
+      text-align: center;
+      margin-right: 8px;
+      font-size: 12px;
+      color: #ffffff;
+      background: #b7bcc2;
+      border-radius: 3px;
+      vertical-align: middle;
+    }
+    .zhaoyuxin1029_rank_list li:nth-child(1) em,
+    .zhaoyuxin1029_rank_list li:nth-child(2) em,
+    .zhaoyuxin1029_rank_list li:nth-child(3) em { background: #e60012; }
+  </style>
+</head>
+<body>
+  <a class="zhaoyuxin1029_back_home" href="index.html">← 返回首页 index.html</a>
+
+  <div class="zhaoyuxin1029_rank_box">
+    <!-- 选项卡按钮行：每日为默认选中（zhaoyuxin1029_active） -->
+    <div class="zhaoyuxin1029_tabs">
+      <button class="zhaoyuxin1029_tab_btn zhaoyuxin1029_active">每日</button>
+      <button class="zhaoyuxin1029_tab_btn">每周</button>
+      <button class="zhaoyuxin1029_tab_btn">每月</button>
+      <button class="zhaoyuxin1029_tab_btn">全部</button>
+    </div>
+
+    <!-- 每日榜（默认显示，与按钮按索引一一对应） -->
+    <div class="zhaoyuxin1029_tab_panel zhaoyuxin1029_active">
+      <ul class="zhaoyuxin1029_rank_list">
+        <li><em>1</em>最美的时光</li>
+        <li><em>2</em>咱们结婚吧</li>
+        <li><em>3</em>渗透</li>
+        <li><em>4</em>继承者们</li>
+        <li><em>5</em>烽火佳人</li>
+        <li><em>6</em>极品女士第2季</li>
+        <li><em>7</em>爱闪亮</li>
+        <li><em>8</em>狼烟（2013）</li>
+        <li><em>9</em>钱多多炼爱记</li>
+        <li><em>10</em>苍狼</li>
+      </ul>
+    </div>
+
+    <!-- 每周榜 -->
+    <div class="zhaoyuxin1029_tab_panel">
+      <ul class="zhaoyuxin1029_rank_list">
+        <li><em>1</em>咱们结婚吧</li>
+        <li><em>2</em>继承者们</li>
+        <li><em>3</em>最美的时光</li>
+        <li><em>4</em>爱闪亮</li>
+        <li><em>5</em>渗透</li>
+        <li><em>6</em>狼烟（2013）</li>
+        <li><em>7</em>三十岁，你好</li>
+        <li><em>8</em>钱多多炼爱记</li>
+        <li><em>9</em>特种兵之火凤凰</li>
+        <li><em>10</em>极品女士第2季</li>
+      </ul>
+    </div>
+
+    <!-- 每月榜 -->
+    <div class="zhaoyuxin1029_tab_panel">
+      <ul class="zhaoyuxin1029_rank_list">
+        <li><em>1</em>特种兵之火凤凰</li>
+        <li><em>2</em>咱们结婚吧</li>
+        <li><em>3</em>继承者们</li>
+        <li><em>4</em>金玉满堂</li>
+        <li><em>5</em>王的女人</li>
+        <li><em>6</em>爱闪亮</li>
+        <li><em>7</em>爱情面前谁怕谁</li>
+        <li><em>8</em>英雄联盟</li>
+        <li><em>9</em>小爸爸</li>
+        <li><em>10</em>我们这拨人</li>
+      </ul>
+    </div>
+
+    <!-- 全部榜 -->
+    <div class="zhaoyuxin1029_tab_panel">
+      <ul class="zhaoyuxin1029_rank_list">
+        <li><em>1</em>永不磨灭的番号</li>
+        <li><em>2</em>特种兵之火凤凰</li>
+        <li><em>3</em>新还珠格格</li>
+        <li><em>4</em>咱们结婚吧</li>
+        <li><em>5</em>小爸爸</li>
+        <li><em>6</em>心术</li>
+        <li><em>7</em>乡村爱情5</li>
+        <li><em>8</em>天天有喜</li>
+        <li><em>9</em>一不小心爱上你</li>
+        <li><em>10</em>夏日甜心</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 外部引用可复用选项卡组件（js 文件夹） -->
+  <script src="js/zhaoyuxin1029_tab.js"></script>
+  <!-- 外部引用页面初始化脚本（js 文件夹） -->
+  <script src="js/zhaoyuxin1029_main.js"></script>
+</body>
+</html>
